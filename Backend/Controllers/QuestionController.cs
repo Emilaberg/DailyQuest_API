@@ -21,7 +21,7 @@ namespace Backend.Controllers
         {
             return await _context.Questions
                 .Include(q => q.Answers)
-                .Include(q => q.MetaTags)
+                .Include(q => q.QuestionMetaTags)
                 .ToListAsync();
         }
 
@@ -30,8 +30,8 @@ namespace Backend.Controllers
         {
             var question = await _context.Questions
                 .Include(q => q.Answers)
-                .Include(q => q.MetaTags)
-                .FirstOrDefaultAsync(q => q.QuestionID == id);
+                .Include(q => q.QuestionMetaTags)
+                .FirstOrDefaultAsync(q => q.QuestionId == id);
 
             if (question == null)
             {

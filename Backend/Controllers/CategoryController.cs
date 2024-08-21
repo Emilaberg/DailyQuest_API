@@ -40,13 +40,13 @@ namespace Backend.Controllers
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryID }, category);
+            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryId }, category);
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutCategory(int id, CategoryModel category)
         {
-            if (id != category.CategoryID)
+            if (id != category.CategoryId)
             {
                 return BadRequest();
             }

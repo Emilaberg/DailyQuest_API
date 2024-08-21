@@ -17,7 +17,10 @@ public class QuestionModel
 
     public int CategoryId { get; set; }
 
-    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new List<QuestionMetaTag>();
+    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new();
+
+    public List<AnswerModel> Answers { get; set; } = new();
+
 
     public required string CategoryName { get; set; } = null!;
 }

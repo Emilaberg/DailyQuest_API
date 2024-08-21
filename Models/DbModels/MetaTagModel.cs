@@ -6,7 +6,7 @@ using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared;
+namespace Shared.DbModels;
 
 public class MetaTagModel
 {

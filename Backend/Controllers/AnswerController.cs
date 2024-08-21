@@ -1,7 +1,7 @@
 ﻿using DataBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shared;
+using Shared.DbModels;
 
 namespace Backend.Controllers
 {

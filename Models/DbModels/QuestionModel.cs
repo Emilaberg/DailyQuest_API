@@ -13,7 +13,6 @@ public class QuestionModel
     [Key]
     public int QuestionId { get; set; }
 
-    public CategoryModel? Category { get; set; }
 
     public int CategoryId { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 namespace Backend.Controllers
 
 {
@@ -16,13 +17,13 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryModel>>> GetCategories()
         {
             return await _context.Categories.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<CategoryModel>> GetCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
             if (category == null)
@@ -34,7 +35,7 @@ namespace Backend.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<CategoryModel>> PostCategory(CategoryModel category)
         {
             _context.Categories.Add(category);
             await _context.SaveChangesAsync();
@@ -43,7 +44,7 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        public async Task<IActionResult> PutCategory(int id, CategoryModel category)
         {
             if (id != category.CategoryID)
             {
@@ -88,7 +89,7 @@ namespace Backend.Controllers
 
         private bool CategoryExists(int id)
         {
-            return _context.Categories.Any(e => e.CategoryID == id);
+            return _context.Categories.Any(e => e.CategoryId == id);
         }
     }
 }

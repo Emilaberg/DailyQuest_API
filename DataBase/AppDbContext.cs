@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace DataBase
 {
@@ -8,10 +9,10 @@ namespace DataBase
         {
         }
 
-        public DbSet<Category> Categories { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Answer> Answers { get; set; }
-        public DbSet<MetaTag> MetaTags { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
+        public DbSet<QuestionModel> Questions { get; set; }
+        public DbSet<AnswerModel> Answers { get; set; }
+        public DbSet<MetaTagModel> MetaTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,15 +20,15 @@ namespace DataBase
 
 
             //Category Entity
-            modelBuilder.Entity<Category>()
+            modelBuilder.Entity<CategoryModel>()
                 .HasKey(c => c.CategoryId);
 
-            modelBuilder.Entity<Category>()
+            modelBuilder.Entity<CategoryModel>()
                 .Property(c => c.CategoryName)
                 .IsRequired();
 
-            modelBuilder.Entity<Category>()
-                .HasMany(c => c.Questions)
+            modelBuilder.Entity<CategoryModel>()
+                .HasMany(c => c.Question)
                 .WithOne(q => q.Category)
                 .HasForeignKey(q => q.CategoryId);
 

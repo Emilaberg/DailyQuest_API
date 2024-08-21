@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace Backend.Controllers
 {
@@ -16,13 +17,13 @@ namespace Backend.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Answer>>> GetAnswers()
+        public async Task<ActionResult<IEnumerable<AnswerModel>>> GetAnswers()
         {
             return await _context.Answers.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Answer>> GetAnswer(int id)
+        public async Task<ActionResult<AnswerModel>> GetAnswer(int id)
         {
             var answer = await _context.Answers.FindAsync(id);
 
@@ -35,18 +36,18 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Answer>> PostAnswer(Answer answer)
+        public async Task<ActionResult<AnswerModel>> PostAnswer(AnswerModel answer)
         {
             _context.Answers.Add(answer);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerID }, answer);
+            return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerId }, answer);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnswer(int id, Answer answer)
+        public async Task<IActionResult> PutAnswer(int id, AnswerModel answer)
         {
-            if (id != answer.AnswerID)
+            if (id != answer.AnswerId)
             {
                 return BadRequest();
             }
@@ -89,7 +90,7 @@ namespace Backend.Controllers
 
         private bool AnswerExists(int id)
         {
-            return _context.Answers.Any(e => e.AnswerID == id);
+            return _context.Answers.Any(e => e.AnswerId == id);
         }
     }
 }

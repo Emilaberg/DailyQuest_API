@@ -1,6 +1,7 @@
 ﻿using DataBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Shared;
 
 namespace Backend.Controllers
 {
@@ -10,48 +11,54 @@ namespace Backend.Controllers
     {
         private readonly AppDbContext _context;
 
-        public AnswerController(AppDbContext context)
+        public QuestionController(AppDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Answer>>> GetAnswers()
+        public async Task<ActionResult<IEnumerable<QuestionModel>>> GetQuestions()
         {
-            return await _context.Answers.ToListAsync();
+            return await _context.Questions
+                .Include(q => q.Answers)
+                .Include(q => q.MetaTags)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Answer>> GetAnswer(int id)
+        public async Task<ActionResult<QuestionModel>> GetQuestion(int id)
         {
-            var answer = await _context.Answers.FindAsync(id);
+            var question = await _context.Questions
+                .Include(q => q.Answers)
+                .Include(q => q.MetaTags)
+                .FirstOrDefaultAsync(q => q.QuestionID == id);
 
-            if (answer == null)
+            if (question == null)
             {
                 return NotFound();
             }
 
-            return answer;
+            return question;
         }
 
         [HttpPost]
-        public async Task<ActionResult<Answer>> PostAnswer(Answer answer)
+        public async Task<ActionResult<QuestionModel>> PostQuestion(QuestionModel question)
         {
-            _context.Answers.Add(answer);
+            _context.Questions.Add(question);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerID }, answer);
+            return CreatedAtAction(nameof(GetQuestion), new { id = question.QuestionId }, question);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAnswer(int id, Answer answer)
+        public async Task<IActionResult> PutQuestion(int id, QuestionModel question)
         {
-            if (id != answer.AnswerID)
+            if (id != question.QuestionId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(answer).State = EntityState.Modified;
+            _context.Entry(question).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +66,7 @@ namespace Backend.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AnswerExists(id))
+                if (!QuestionExists(id))
                 {
                     return NotFound();
                 }
@@ -73,23 +80,23 @@ namespace Backend.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAnswer(int id)
+        public async Task<IActionResult> DeleteQuestion(int id)
         {
-            var answer = await _context.Answers.FindAsync(id);
-            if (answer == null)
+            var question = await _context.Questions.FindAsync(id);
+            if (question == null)
             {
                 return NotFound();
             }
 
-            _context.Answers.Remove(answer);
+            _context.Questions.Remove(question);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AnswerExists(int id)
+        private bool QuestionExists(int id)
         {
-            return _context.Answers.Any(e => e.AnswerID == id);
+            return _context.Questions.Any(e => e.QuestionId == id);
         }
     }
 }

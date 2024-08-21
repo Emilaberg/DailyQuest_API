@@ -6,14 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared;
+namespace Shared.DbModels;
 
 public class QuestionModel
 {
     [Key]
     public int QuestionId { get; set; }
 
-    public CategoryModel? Category { get; set; }
 
     public int CategoryId { get; set; }
 

@@ -13,9 +13,8 @@ public class MetaTagModel
     [Key]
     public int MetaTagId { get; set; }
 
-    public QuestionModel? Question { get; set; }
-    public int QuestionId { get; set; }
-    public string MetaName { get; set; } = null!;
+    public string TagName { get; set; }
 
+    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new List<QuestionMetaTag>();
 }
 

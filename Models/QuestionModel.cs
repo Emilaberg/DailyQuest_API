@@ -13,13 +13,11 @@ public class QuestionModel
     [Key]
     public int QuestionId { get; set; }
 
-
     public CategoryModel? Category { get; set; }
 
     public int CategoryId { get; set; }
 
+    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new List<QuestionMetaTag>();
 
     public required string CategoryName { get; set; } = null!;
-
-
 }

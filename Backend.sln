@@ -5,9 +5,12 @@ VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{BC2D0F48-0F3A-4A27-AE46-6E727456701C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Models\Shared.csproj", "{2C9BE326-91D3-410B-8CDD-B10CBAB35D59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Models\Shared.csproj", "{2C9BE326-91D3-410B-8CDD-B10CBAB35D59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBase", "DataBase\DataBase.csproj", "{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2C9BE326-91D3-410B-8CDD-B10CBAB35D59} = {2C9BE326-91D3-410B-8CDD-B10CBAB35D59}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

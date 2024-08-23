@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shared;
+using Shared.DbModels;
 
 namespace DataBase
 {
@@ -15,6 +15,10 @@ namespace DataBase
         public DbSet<MetaTagModel> MetaTags { get; set; }
 
         public DbSet<QuizModel> QuizModels { get; set; }
+
+        public DbSet<EmailModel> EmailModels { get; set; }
+
+        public DbSet<QuestionMetaTag> QuestionMetaTags { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

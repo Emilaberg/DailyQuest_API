@@ -1,7 +1,6 @@
-﻿using DataBase;
+﻿using DataBase.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Shared;
+using Shared.DbModels;
 
 namespace Backend.Controllers
 {
@@ -9,38 +8,35 @@ namespace Backend.Controllers
     [ApiController]
     public class AnswerController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IGenericRepository<AnswerModel> _repository;
 
-        public AnswerController(AppDbContext context)
+        public AnswerController(IGenericRepository<AnswerModel> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AnswerModel>>> GetAnswers()
         {
-            return await _context.Answers.ToListAsync();
+            var answers = await _repository.GetAllAsync();
+            return Ok(answers);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<AnswerModel>> GetAnswer(int id)
         {
-            var answer = await _context.Answers.FindAsync(id);
-
+            var answer = await _repository.GetByIdAsync(id);
             if (answer == null)
             {
                 return NotFound();
             }
-
-            return answer;
+            return Ok(answer);
         }
 
         [HttpPost]
         public async Task<ActionResult<AnswerModel>> PostAnswer(AnswerModel answer)
         {
-            _context.Answers.Add(answer);
-            await _context.SaveChangesAsync();
-
+            await _repository.AddAsync(answer);
             return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerId }, answer);
         }
 
@@ -52,45 +48,15 @@ namespace Backend.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(answer).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AnswerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _repository.UpdateAsync(answer);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAnswer(int id)
         {
-            var answer = await _context.Answers.FindAsync(id);
-            if (answer == null)
-            {
-                return NotFound();
-            }
-
-            _context.Answers.Remove(answer);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool AnswerExists(int id)
-        {
-            return _context.Answers.Any(e => e.AnswerId == id);
         }
     }
 }

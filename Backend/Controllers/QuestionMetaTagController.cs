@@ -6,24 +6,26 @@ namespace Backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MetaTagController : ControllerBase
+    public class QuestionMetaTagController : ControllerBase
     {
-        private readonly IGenericRepository<MetaTagModel> _repository;
+        private readonly IGenericRepository<QuestionMetaTag> _repository;
 
-        public MetaTagController(IGenericRepository<MetaTagModel> repository)
+        public QuestionMetaTagController(IGenericRepository<QuestionMetaTag> repository)
         {
             _repository = repository;
         }
 
+        // GET: api/QuestionMetaTag
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<MetaTagModel>>> GetMetaTags()
+        public async Task<ActionResult<IEnumerable<QuestionMetaTag>>> GetQuestionMetaTags()
         {
             var metaTags = await _repository.GetAllAsync();
             return Ok(metaTags);
         }
 
+        // GET: api/QuestionMetaTag/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<MetaTagModel>> GetMetaTag(int id)
+        public async Task<ActionResult<QuestionMetaTag>> GetQuestionMetaTag(int id)
         {
             var metaTag = await _repository.GetByIdAsync(id);
             if (metaTag == null)
@@ -33,15 +35,17 @@ namespace Backend.Controllers
             return Ok(metaTag);
         }
 
+        // POST: api/QuestionMetaTag
         [HttpPost]
-        public async Task<ActionResult<MetaTagModel>> PostMetaTag(MetaTagModel metaTag)
+        public async Task<ActionResult<QuestionMetaTag>> PostQuestionMetaTag(QuestionMetaTag metaTag)
         {
             await _repository.AddAsync(metaTag);
-            return CreatedAtAction(nameof(GetMetaTag), new { id = metaTag.MetaTagId }, metaTag);
+            return CreatedAtAction(nameof(GetQuestionMetaTag), new { id = metaTag.MetaTagId }, metaTag);
         }
 
+        // PUT: api/QuestionMetaTag/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMetaTag(int id, MetaTagModel metaTag)
+        public async Task<IActionResult> PutQuestionMetaTag(int id, QuestionMetaTag metaTag)
         {
             if (id != metaTag.MetaTagId)
             {
@@ -52,8 +56,9 @@ namespace Backend.Controllers
             return NoContent();
         }
 
+        // DELETE: api/QuestionMetaTag/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMetaTag(int id)
+        public async Task<IActionResult> DeleteQuestionMetaTag(int id)
         {
             await _repository.DeleteAsync(id);
             return NoContent();

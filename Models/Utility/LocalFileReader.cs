@@ -1,11 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json.Linq;
 
 namespace Shared.Utility;
 
@@ -14,14 +7,13 @@ namespace Shared.Utility;
 /// Has a method to get a value from the JObject by key, can only return and handle json key value pairs where the value is a string
 /// If anything goes wrong it logs the error and exits the program
 /// </summary>
-public class LocalFileReader
+public class LocalFileReader(string path = """C:\Programming\Dependencies\SecretFiles\DailyQuest.json""")
 {
-    //PUT THE PATH TO THE FILE YOU WANT TO READ HERE
-    public LocalFileReader() : this("C:\\Programming\\Dependencies\\SecretFiles\\DailyQuest.json") { }
+    //Insert path to secret file HERE  ____^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^______
 
-    private readonly string _path;
+    private readonly string _path = path;
     private JObject? _json;
-    public JObject Json
+    public JObject? Json
     {
         get => _json;
         set => throw new AccessViolationException("Not Allowed to set the JSon variable");
@@ -36,7 +28,7 @@ public class LocalFileReader
     {
         try
         {
-            if (!File.Exists(_path)) Console.WriteLine("File not found");
+            if (!File.Exists(_path)) throw new FileNotFoundException("File Not Found: " + _path);
         }
         catch (Exception e)
         {
@@ -45,11 +37,11 @@ public class LocalFileReader
             Environment.Exit(1);
         }
 
-        string? _rawJson = null;
+        string? rawJson = null;
         try
         {
-            _rawJson = File.ReadAllText(_path);
-            if (_rawJson == null) throw new NullReferenceException("The result of reading the file was null");
+            rawJson = File.ReadAllText(_path);
+            if (rawJson == null) throw new NullReferenceException("The result of reading the file was null");
         }
         catch (Exception e)
         {
@@ -60,7 +52,7 @@ public class LocalFileReader
 
         try
         {
-            _json = JObject.Parse(_rawJson);
+            _json = JObject.Parse(rawJson);
             if (_json == null) throw new NullReferenceException("The result of parsing the JSON file was null");
         }
         catch (Exception e)
@@ -74,13 +66,13 @@ public class LocalFileReader
     /// <summary>
     /// Searches for a key in the JObject and returns the value as a string
     /// Example: get value of "password" from the JObject
-    /// do a  .getValue("password")  and it will return the value of the key "password"
+    /// do a  .GetValue("password")  and it will return the value of the key "password"
     /// log error if it fails,and exit the program
     /// </summary>
     /// <param name="key">the Key from Key Value Pairs</param>
     /// <returns></returns>
     /// <exception cref="NullReferenceException"></exception>
-    public string? getValue(string key)
+    public string? GetValue(string key)
     {
         if (_json == null) throw new NullReferenceException("Can not read from a null entity");
         try
@@ -100,10 +92,7 @@ public class LocalFileReader
 
 
 
-    public LocalFileReader(string path)
-    {
-        _path = path;
-    }
+
 
 }
 

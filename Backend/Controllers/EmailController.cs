@@ -1,6 +1,5 @@
-﻿using DataBase;
+﻿using DataBase.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Shared.DbModels;
 namespace Backend.Controllers
 
@@ -9,94 +8,55 @@ namespace Backend.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
+        private readonly IGenericRepository<EmailModel> _repository;
 
-        private readonly AppDbContext _context;
-
-        public EmailController(AppDbContext context)
+        public EmailController(IGenericRepository<EmailModel> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Email
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmailModel>>> GetEmailModels()
+        public async Task<ActionResult<IEnumerable<EmailModel>>> GetEmails()
         {
-            return await _context.EmailModels.ToListAsync();
+            var emails = await _repository.GetAllAsync();
+            return Ok(emails);
         }
 
-        // GET: api/Email/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<EmailModel>> GetEmailModel(int id)
+        public async Task<ActionResult<EmailModel>> GetEmail(int id)
         {
-            var emailModel = await _context.EmailModels.FindAsync(id);
-
-            if (emailModel == null)
+            var email = await _repository.GetByIdAsync(id);
+            if (email == null)
             {
                 return NotFound();
             }
-
-            return emailModel;
+            return Ok(email);
         }
 
-        // POST: api/Email
         [HttpPost]
-        public async Task<ActionResult<EmailModel>> PostEmailModel(EmailModel emailModel)
+        public async Task<ActionResult<EmailModel>> PostEmail(EmailModel email)
         {
-            _context.EmailModels.Add(emailModel);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetEmailModel), new { id = emailModel.EmailId }, emailModel);
+            await _repository.AddAsync(email);
+            return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
         }
 
-        // PUT: api/Email/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmailModel(int id, EmailModel emailModel)
+        public async Task<IActionResult> PutEmail(int id, EmailModel email)
         {
-            if (id != emailModel.EmailId)
+            if (id != email.EmailId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(emailModel).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!EmailModelExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _repository.UpdateAsync(email);
             return NoContent();
         }
 
-        // DELETE: api/Email/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEmailModel(int id)
+        public async Task<IActionResult> DeleteEmail(int id)
         {
-            var emailModel = await _context.EmailModels.FindAsync(id);
-            if (emailModel == null)
-            {
-                return NotFound();
-            }
-
-            _context.EmailModels.Remove(emailModel);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool EmailModelExists(int id)
-        {
-            return _context.EmailModels.Any(e => e.EmailId == id);
         }
     }
 }

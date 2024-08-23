@@ -28,6 +28,13 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IGenericRepository<QuizModel>, QuizRepository>();
+builder.Services.AddScoped<IGenericRepository<QuestionMetaTag>, QuestionMetaTagRepository>();
+builder.Services.AddScoped<IGenericRepository<AnswerModel>, AnswerRepository>();
+builder.Services.AddScoped<IGenericRepository<EmailModel>, EmailRepository>();
+builder.Services.AddScoped<IGenericRepository<QuizModel>, QuizRepository>();
+
+
+
 
 builder.Services.AddControllers();
 

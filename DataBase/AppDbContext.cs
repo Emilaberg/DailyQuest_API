@@ -18,6 +18,8 @@ namespace DataBase
 
         public DbSet<EmailModel> EmailModels { get; set; }
 
+        public DbSet<QuestionMetaTag> QuestionMetaTags { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

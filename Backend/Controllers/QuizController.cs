@@ -1,6 +1,6 @@
-﻿using DataBase;
+﻿using DataBase.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Shared.DbModels;
 
 namespace Backend.Controllers
 {
@@ -8,94 +8,55 @@ namespace Backend.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
+        private readonly IGenericRepository<QuizModel> _repository;
 
-        private readonly AppDbContext _context;
-
-        public QuizController(AppDbContext context)
+        public QuizController(IGenericRepository<QuizModel> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
-        // GET: api/Quiz
         [HttpGet]
         public async Task<ActionResult<IEnumerable<QuizModel>>> GetQuizModels()
         {
-            return await _context.QuizModels.ToListAsync();
+            var quizModels = await _repository.GetAllAsync();
+            return Ok(quizModels);
         }
 
-        // GET: api/Quiz/5
         [HttpGet("{id}")]
         public async Task<ActionResult<QuizModel>> GetQuizModel(int id)
         {
-            var quizModel = await _context.QuizModels.FindAsync(id);
-
+            var quizModel = await _repository.GetByIdAsync(id);
             if (quizModel == null)
             {
                 return NotFound();
             }
-
-            return quizModel;
+            return Ok(quizModel);
         }
 
-        // POST: api/Quiz
         [HttpPost]
         public async Task<ActionResult<QuizModel>> PostQuizModel(QuizModel quizModel)
         {
-            _context.QuizModels.Add(quizModel);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetQuizModel), new { id = quizModel.QuizId }, quizModel);
+            await _repository.AddAsync(quizModel);
+            return CreatedAtAction(nameof(GetQuizModel), new { id = quizModel.QuizModelId }, quizModel);
         }
 
-        // PUT: api/Quiz/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutQuizModel(int id, QuizModel quizModel)
         {
-            if (id != quizModel.QuizId)
+            if (id != quizModel.QuizModelId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(quizModel).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuizModelExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _repository.UpdateAsync(quizModel);
             return NoContent();
         }
 
-        // DELETE: api/Quiz/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuizModel(int id)
         {
-            var quizModel = await _context.QuizModels.FindAsync(id);
-            if (quizModel == null)
-            {
-                return NotFound();
-            }
-
-            _context.QuizModels.Remove(quizModel);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool QuizModelExists(int id)
-        {
-            return _context.QuizModels.Any(e => e.QuizId == id);
         }
     }
 }

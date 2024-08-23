@@ -45,3 +45,5 @@ namespace DataBase.Repositories
                 await _context.SaveChangesAsync();
             }
         }
+    }
+}

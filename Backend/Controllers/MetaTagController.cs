@@ -1,7 +1,6 @@
-﻿using DataBase;
+﻿using DataBase.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Shared;
+using Shared.DbModels;
 
 namespace Backend.Controllers
 {
@@ -9,38 +8,35 @@ namespace Backend.Controllers
     [ApiController]
     public class MetaTagController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IGenericRepository<MetaTagModel> _repository;
 
-        public MetaTagController(AppDbContext context)
+        public MetaTagController(IGenericRepository<MetaTagModel> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MetaTagModel>>> GetMetaTags()
         {
-            return await _context.MetaTags.ToListAsync();
+            var metaTags = await _repository.GetAllAsync();
+            return Ok(metaTags);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<MetaTagModel>> GetMetaTag(int id)
         {
-            var metaTag = await _context.MetaTags.FindAsync(id);
-
+            var metaTag = await _repository.GetByIdAsync(id);
             if (metaTag == null)
             {
                 return NotFound();
             }
-
-            return metaTag;
+            return Ok(metaTag);
         }
 
         [HttpPost]
         public async Task<ActionResult<MetaTagModel>> PostMetaTag(MetaTagModel metaTag)
         {
-            _context.MetaTags.Add(metaTag);
-            await _context.SaveChangesAsync();
-
+            await _repository.AddAsync(metaTag);
             return CreatedAtAction(nameof(GetMetaTag), new { id = metaTag.MetaTagId }, metaTag);
         }
 
@@ -52,45 +48,15 @@ namespace Backend.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(metaTag).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!MetaTagExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _repository.UpdateAsync(metaTag);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMetaTag(int id)
         {
-            var metaTag = await _context.MetaTags.FindAsync(id);
-            if (metaTag == null)
-            {
-                return NotFound();
-            }
-
-            _context.MetaTags.Remove(metaTag);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool MetaTagExists(int id)
-        {
-            return _context.MetaTags.Any(e => e.MetaTagId == id);
         }
     }
 }

@@ -4,13 +4,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Backend", "Backend\Backend.csproj", "{BC2D0F48-0F3A-4A27-AE46-6E727456701C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A} = {66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Models\Shared.csproj", "{2C9BE326-91D3-410B-8CDD-B10CBAB35D59}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataBase", "DataBase\DataBase.csproj", "{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}"
+<<<<<<< HEAD
+=======
+	ProjectSection(ProjectDependencies) = postProject
+		{2C9BE326-91D3-410B-8CDD-B10CBAB35D59} = {2C9BE326-91D3-410B-8CDD-B10CBAB35D59}
+	EndProjectSection
+>>>>>>> e4941d1233e9a533bd6f3c62650b1985d07ea936
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{AE3C995C-5468-4AEA-971A-05B38F4BA7B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +35,10 @@ Global
 		{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66BEA2A3-0011-4BE4-87B5-811D7C8ABA3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE3C995C-5468-4AEA-971A-05B38F4BA7B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE3C995C-5468-4AEA-971A-05B38F4BA7B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE3C995C-5468-4AEA-971A-05B38F4BA7B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE3C995C-5468-4AEA-971A-05B38F4BA7B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -36,7 +36,8 @@ namespace DataBase
 
             // Seed Quizzes
             modelBuilder.Entity<QuizModel>().HasData(
-                new QuizModel { QuizModelId = 1, QuizName = "Gaming Quiz" }
+                new QuizModel { QuizModelId = 1, QuizName = "Gaming Quiz" },
+                new QuizModel { QuizModelId = 2, QuizName = "Mixed Quiz" }
 
             );
 

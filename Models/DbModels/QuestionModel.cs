@@ -12,7 +12,7 @@ public class QuestionModel
     public string? Question { get; set; }
     //public int MetaTagId { get; set; }
 
-    public int QuizId { get; set; }
+    //public int QuizId { get; set; }
 
     public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new();
 

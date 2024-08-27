@@ -18,6 +18,7 @@ public class LocalFileReader(string path = """/ProgramProperties.json""")
         set => throw new AccessViolationException("Not Allowed to set the JSon variable");
 
     }
+    // DELEYE THIS COMMENT
 
 
     /// <summary>

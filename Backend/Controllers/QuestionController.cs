@@ -1,7 +1,6 @@
-﻿using DataBase;
+﻿using DataBase.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Shared;
+using Shared.DbModels;
 
 namespace Backend.Controllers
 {
@@ -9,44 +8,35 @@ namespace Backend.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IGenericRepository<QuestionModel> _repository;
 
-        public QuestionController(AppDbContext context)
+        public QuestionController(IGenericRepository<QuestionModel> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<QuestionModel>>> GetQuestions()
         {
-            return await _context.Questions
-                .Include(q => q.Answers)
-                .Include(q => q.QuestionMetaTags)
-                .ToListAsync();
+            var questions = await _repository.GetAllAsync();
+            return Ok(questions);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<QuestionModel>> GetQuestion(int id)
         {
-            var question = await _context.Questions
-                .Include(q => q.Answers)
-                .Include(q => q.QuestionMetaTags)
-                .FirstOrDefaultAsync(q => q.QuestionId == id);
-
+            var question = await _repository.GetByIdAsync(id);
             if (question == null)
             {
                 return NotFound();
             }
-
-            return question;
+            return Ok(question);
         }
 
         [HttpPost]
         public async Task<ActionResult<QuestionModel>> PostQuestion(QuestionModel question)
         {
-            _context.Questions.Add(question);
-            await _context.SaveChangesAsync();
-
+            await _repository.AddAsync(question);
             return CreatedAtAction(nameof(GetQuestion), new { id = question.QuestionId }, question);
         }
 
@@ -58,45 +48,15 @@ namespace Backend.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(question).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuestionExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            await _repository.UpdateAsync(question);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuestion(int id)
         {
-            var question = await _context.Questions.FindAsync(id);
-            if (question == null)
-            {
-                return NotFound();
-            }
-
-            _context.Questions.Remove(question);
-            await _context.SaveChangesAsync();
-
+            await _repository.DeleteAsync(id);
             return NoContent();
-        }
-
-        private bool QuestionExists(int id)
-        {
-            return _context.Questions.Any(e => e.QuestionId == id);
         }
     }
 }

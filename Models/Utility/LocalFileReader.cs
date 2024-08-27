@@ -19,6 +19,7 @@ public class LocalFileReader(string path = """/ProgramProperties.json""")
 
     }
 
+
     /// <summary>
     /// Reads the JSON file from the _path and parses it into a JObject
     /// If anything fails it logs the error and exits the program

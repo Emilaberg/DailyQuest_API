@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ProgramProperties..json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="ProgramProperties..json" />
+    <None Remove="Utility\ProgramProperties.json" />
   </ItemGroup>
 
   <ItemGroup>

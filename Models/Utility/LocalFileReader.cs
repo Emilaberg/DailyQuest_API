@@ -7,11 +7,10 @@ namespace Shared.Utility;
 /// Has a method to get a value from the JObject by key, can only return and handle json key value pairs where the value is a string
 /// If anything goes wrong it logs the error and exits the program
 /// </summary>
-public class LocalFileReader(string path = """C:\Programming\Dependencies\SecretFiles\DailyQuest.json""")
-{
-    //Insert path to secret file HERE  ____^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^______
+public class LocalFileReader(string path = """/ProgramProperties.json""")
+{ //Insert path to secret file HERE  _________^^^^^^^^^^^^^^^^^^^^^^^______
 
-    private readonly string _path = path;
+    private string _path = path;
     private JObject? _json;
     public JObject? Json
     {
@@ -24,7 +23,7 @@ public class LocalFileReader(string path = """C:\Programming\Dependencies\Secret
     /// Reads the JSON file from the _path and parses it into a JObject
     /// If anything fails it logs the error and exits the program
     /// </summary>
-    public void ReadJsonFile()
+    public bool? ReadJsonFile()
     {
         try
         {
@@ -34,7 +33,7 @@ public class LocalFileReader(string path = """C:\Programming\Dependencies\Secret
         {
             Console.WriteLine("File Not Found: ");
             Console.WriteLine(e.StackTrace);
-            Environment.Exit(1);
+            return null;
         }
 
         string? rawJson = null;
@@ -47,7 +46,7 @@ public class LocalFileReader(string path = """C:\Programming\Dependencies\Secret
         {
             Console.WriteLine("Could not read from the file: ");
             Console.WriteLine(e.StackTrace);
-            Environment.Exit(1);
+            return null;
         }
 
         try
@@ -59,8 +58,9 @@ public class LocalFileReader(string path = """C:\Programming\Dependencies\Secret
         {
             Console.WriteLine("Could not parse the JSON file");
             Console.WriteLine(e.StackTrace);
-            Environment.Exit(1);
+            return null;
         }
+        return true;
     }
 
     /// <summary>
@@ -74,25 +74,35 @@ public class LocalFileReader(string path = """C:\Programming\Dependencies\Secret
     /// <exception cref="NullReferenceException"></exception>
     public string? GetValue(string key)
     {
-        if (_json == null) throw new NullReferenceException("Can not read from a null entity");
+        if (_json == null) return null;
         try
         {
             var result = _json[key]?.ToString();
             if (result != null) return result;
-            if (result == null) throw new NullReferenceException("The result of reading the key was null");
+            if (result == null) return null;
         }
         catch (Exception e)
         {
             Console.WriteLine("Something went Wrong when trying to read key: " + key + " from the JObject");
             Console.WriteLine(e.StackTrace);
-            Environment.Exit(1);
+            return null;
         }
+
         return null;
     }
 
+    public void CreateNewValue(string? Key, string? Value)
+    {
+        throw new NotImplementedException();
+    }
 
+    public void RemoveValue(string? Key)
+    {
+        throw new NotImplementedException();
+    }
 
-
-
+    public void UpdateValue(string key, string NewValue)
+    {
+        throw new NotImplementedException();
+    }
 }
-

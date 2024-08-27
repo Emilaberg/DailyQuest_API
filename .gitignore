@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Models/Utility/ProgramProperties.json
+/Models/Utility/ProgramProperties..json

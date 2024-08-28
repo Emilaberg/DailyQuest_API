@@ -22,7 +22,7 @@ namespace Backend.Controllers
             return Ok(quizModels);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{AnswerId}")]
         public async Task<ActionResult<QuizModel>> GetQuizModel(int id)
         {
             var quizModel = await _repository.GetByIdAsync(id);
@@ -37,13 +37,13 @@ namespace Backend.Controllers
         public async Task<ActionResult<QuizModel>> PostQuizModel(QuizModel quizModel)
         {
             await _repository.AddAsync(quizModel);
-            return CreatedAtAction(nameof(GetQuizModel), new { id = quizModel.QuizModelId }, quizModel);
+            return CreatedAtAction(nameof(GetQuizModel), new { id = quizModel.QuizId }, quizModel);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{AnswerId}")]
         public async Task<IActionResult> PutQuizModel(int id, QuizModel quizModel)
         {
-            if (id != quizModel.QuizModelId)
+            if (id != quizModel.QuizId)
             {
                 return BadRequest();
             }
@@ -52,7 +52,7 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{AnswerId}")]
         public async Task<IActionResult> DeleteQuizModel(int id)
         {
             await _repository.DeleteAsync(id);

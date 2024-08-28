@@ -1,8 +1,8 @@
-﻿using Shared.DbModels;
+﻿//using Shared.DbModels;
 
-namespace DataBase.Repositories.Interfaces
-{
-    public interface IQuestionMetaTagRepository : IGenericRepository<QuestionMetaTag>
-    {
-    }
-}
+//namespace DataBase.Repositories.Interfaces
+//{
+//    public interface IQuestionMetaTagRepository : IGenericRepository<QuestionMetaTag>
+//    {
+//    }
+//}

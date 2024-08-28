@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Shared.DbModels;
 
@@ -13,13 +7,11 @@ public class QuestionModel
     [Key]
     public int QuestionId { get; set; }
 
-
-    public int CategoryId { get; set; }
-
-    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new();
+    public string Question { get; set; } = null!;
 
     public List<AnswerModel> Answers { get; set; } = new();
 
+    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new();
+    public List<QuizQuestion> QuizQuestions { get; set; } = new();
 
-    public required string CategoryName { get; set; } = null!;
 }

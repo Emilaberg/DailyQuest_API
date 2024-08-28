@@ -1,26 +1,28 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Shared.Utility;
+namespace Shared;
 
 /// <summary>
 /// A class that reads a JSON file from a local path and parses it into a JObject
 /// Has a method to get a value from the JObject by key, can only return and handle json key value pairs where the value is a string
 /// If anything goes wrong it logs the error and exits the program
 /// </summary>
-public class LocalFileReader(string path = """/ProgramProperties.json""")
-{ //Insert path to secret file HERE  _________^^^^^^^^^^^^^^^^^^^^^^^______
-
-    private string _path = path;
+public class LocalFileReader
+{
+    private readonly string _path;
     private JObject? _json;
+
+    public LocalFileReader(string path = """./ProgramProperties.json""")
+    {
+        _path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), path));
+        Console.WriteLine("The path" + _path);
+    }
+
     public JObject? Json
     {
         get => _json;
-        set => throw new AccessViolationException("Not Allowed to set the JSon variable");
-
+        private set => throw new AccessViolationException("Not Allowed to set the Json variable");
     }
-    // DELEYE THIS COMMENT
-
-
     /// <summary>
     /// Reads the JSON file from the _path and parses it into a JObject
     /// If anything fails it logs the error and exits the program

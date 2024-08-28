@@ -15,7 +15,7 @@ if (reader.ReadJsonFile() == null)
     throw new FileLoadException();
 }
 
-string? connectionString = reader.GetValue("ConnectionString");
+string? connectionString = reader.GetValue<string>("ConnectionString");
 if (connectionString == null) throw new NullReferenceException();
 
 var builder = WebApplication.CreateBuilder(args);

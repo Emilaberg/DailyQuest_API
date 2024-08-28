@@ -22,7 +22,7 @@ namespace Backend.Controllers
             return Ok(emails);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{AnswerId}")]
         public async Task<ActionResult<EmailModel>> GetEmail(int id)
         {
             var email = await _repository.GetByIdAsync(id);
@@ -40,7 +40,7 @@ namespace Backend.Controllers
             return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{AnswerId}")]
         public async Task<IActionResult> PutEmail(int id, EmailModel email)
         {
             if (id != email.EmailId)
@@ -52,7 +52,7 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{AnswerId}")]
         public async Task<IActionResult> DeleteEmail(int id)
         {
             await _repository.DeleteAsync(id);

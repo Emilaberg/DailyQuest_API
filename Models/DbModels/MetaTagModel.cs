@@ -9,6 +9,7 @@ public class MetaTagModel
 
     public string? TagName { get; set; }
 
-    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new List<QuestionMetaTag>();
+    public List<QuestionMetaTag> QuestionMetaTags { get; set; } = new();
+
 }
 

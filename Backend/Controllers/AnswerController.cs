@@ -22,7 +22,7 @@ namespace Backend.Controllers
             return Ok(answers);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{AnswerId}")]
         public async Task<ActionResult<AnswerModel>> GetAnswer(int id)
         {
             var answer = await _repository.GetByIdAsync(id);
@@ -40,7 +40,7 @@ namespace Backend.Controllers
             return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerId }, answer);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{AnswerId}")]
         public async Task<IActionResult> PutAnswer(int id, AnswerModel answer)
         {
             if (id != answer.AnswerId)
@@ -52,7 +52,7 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{AnswerId}")]
         public async Task<IActionResult> DeleteAnswer(int id)
         {
             await _repository.DeleteAsync(id);

@@ -1,10 +1,13 @@
-﻿namespace Shared.DbModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Shared.DbModels
 {
     public class QuizModel
     {
-        public int QuizModelId { get; set; }
+        [Key]
+        public int QuizId { get; set; }
         public string? QuizName { get; set; }
-        public List<QuestionModel> Questions { get; set; } = new List<QuestionModel>();
-        //public List<MetaTagModel> MetaTags { get; set; } = new List<MetaTagModel>();
+        public List<QuizQuestion> QuizQuestions { get; set; } = new();
+
     }
 }

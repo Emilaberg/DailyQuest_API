@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Shared.DbModels;
 
-public class QuestionMetaTag
+public class QuizQuestion
 {
+    public int QuizId { get; set; }
+    public QuizModel Quiz { get; set; }
+
     public int QuestionId { get; set; }
     public QuestionModel Question { get; set; }
-
-    public int MetaTagId { get; set; }
-    public MetaTagModel MetaTag { get; set; }
 }
+

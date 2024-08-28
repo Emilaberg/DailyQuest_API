@@ -22,7 +22,7 @@ namespace Backend.Controllers
             return Ok(metaTags);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{AnswerId}")]
         public async Task<ActionResult<MetaTagModel>> GetMetaTag(int id)
         {
             var metaTag = await _repository.GetByIdAsync(id);
@@ -40,7 +40,7 @@ namespace Backend.Controllers
             return CreatedAtAction(nameof(GetMetaTag), new { id = metaTag.MetaTagId }, metaTag);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{AnswerId}")]
         public async Task<IActionResult> PutMetaTag(int id, MetaTagModel metaTag)
         {
             if (id != metaTag.MetaTagId)
@@ -52,7 +52,7 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{AnswerId}")]
         public async Task<IActionResult> DeleteMetaTag(int id)
         {
             await _repository.DeleteAsync(id);

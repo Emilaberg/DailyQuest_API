@@ -4,6 +4,7 @@ using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240831132540_Re did the relations of the models in the AppDbContecxt")]
+    partial class RedidtherelationsofthemodelsintheAppDbContecxt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -408,65 +411,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(733),
-
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(778),
-
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(780),
-
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(781),
-
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(783),
-
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(784),
-
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(786),
-
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-
                             DateLastSent = new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(787),
-
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });

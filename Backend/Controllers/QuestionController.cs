@@ -33,29 +33,29 @@ namespace Backend.Controllers
             return Ok(question);
         }
 
-        [HttpPost]
+
+        [HttpPost("{question}")]
         public async Task PostQuestion(QuestionModel question)
         {
             await _repository.AddAsync(question);
-            //return CreatedAtAction(nameof(GetQuestion), new { id = question.QuestionId }, question);
         }
 
-        [HttpPut("{QuestionId}")]
-        public async Task PutQuestion(QuestionModel QuestionId)
+        [HttpPut("{question}")]
+        public async Task<IActionResult> PutQuestion(QuestionModel question)
         {
-            //if (id != question.QuestionId)
-            //{
-            //    return;
-            //}
+
+
 
             await _repository.UpdateAsync(QuestionId);
             return;
         }
 
-        [HttpDelete("{QuestionId}")]
-        public async Task<IActionResult> DeleteQuestion(int QuestionId)
+
+        [HttpDelete("{questionId}")]
+        public async Task<IActionResult> DeleteQuestion(int questionId)
         {
-            await _repository.DeleteAsync(QuestionId);
+            await _repository.DeleteAsync(questionId);
+
             return NoContent();
         }
     }

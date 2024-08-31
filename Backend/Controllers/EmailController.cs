@@ -1,62 +1,59 @@
 ﻿using DataBase.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Shared.DbModels;
-namespace Backend.Controllers
+namespace Backend.Controllers;
 
+
+[Route("api/[controller]")]
+[ApiController]
+public class EmailController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmailController : ControllerBase
+    private readonly IGenericRepository<EmailModel> _repository;
+
+    public EmailController(IGenericRepository<EmailModel> repository)
     {
-        private readonly IGenericRepository<EmailModel> _repository;
+        _repository = repository;
+    }
 
-        public EmailController(IGenericRepository<EmailModel> repository)
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<EmailModel>>> GetEmails()
+    {
+        var emails = await _repository.GetAllAsync();
+        return Ok(emails);
+    }
+
+
+    [HttpGet("{EmailId}")]
+    public async Task<ActionResult<EmailModel>> GetEmail(int EmailId)
+    {
+        var email = await _repository.GetByIdAsync(EmailId);
+        if (email == null)
         {
-            _repository = repository;
+            return NotFound();
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<EmailModel>>> GetEmails()
-        {
-            var emails = await _repository.GetAllAsync();
-            return Ok(emails);
-        }
+        return Ok(email);
+    }
 
-        [HttpGet("{EmailId}")]
-        public async Task<ActionResult<EmailModel>> GetEmail(int EmailId)
-        {
-            var email = await _repository.GetByIdAsync(EmailId);
-            if (email == null)
-            {
-                return NotFound();
-            }
-            return Ok(email);
-        }
+    [HttpPost]
+    public async Task PostEmail(EmailModel email)
+    {
+        await _repository.AddAsync(email);
+        //return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
+    }
 
-        [HttpPost]
-        public async Task PostEmail(EmailModel email)
-        {
-            await _repository.AddAsync(email);
-            //return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
-        }
 
-        [HttpPut("{EmailId}")]
-        public async Task<IActionResult> PutEmail(EmailModel email)
-        {
-            //if (id != email.EmailId)
-            //{
-            //    return BadRequest();
-            //}
+    [HttpPut("{email}")]
+    public async Task<IActionResult> PutEmail(EmailModel email)
+    {
+        //if (id != email.EmailId)
+        //{
+        //    return BadRequest();
+        //}
 
-            await _repository.UpdateAsync(email);
-            return NoContent();
-        }
 
-        [HttpDelete("{EmailId}")]
-        public async Task<IActionResult> DeleteEmail(int EmailId)
-        {
-            await _repository.DeleteAsync(EmailId);
-            return NoContent();
-        }
+        await _repository.UpdateAsync(email);
+        return NoContent();
+
     }
 }

@@ -33,22 +33,18 @@ namespace Backend.Controllers
             return Ok(quizModel);
         }
 
-        [HttpPost]
-        public async Task PostQuizModel(QuizModel quizModel)
+
+        [HttpPost("{Quiz}")]
+        public async Task PostQuizModel(QuizModel Quiz)
         {
-            await _repository.AddAsync(quizModel);
-            //return CreatedAtAction(nameof(GetQuizModel), new { id = quizModel.QuizId }, quizModel);
+            await _repository.AddAsync(Quiz);
         }
 
-        [HttpPut("{QuizId}")]
-        public async Task<IActionResult> PutQuizModel(QuizModel QuizId)
+        [HttpPut("{Quiz}")]
+        public async Task<IActionResult> PutQuizModel(QuizModel Quiz)
         {
-            //if (id != quizModel.QuizId)
-            //{
-            //    return BadRequest();
-            //}
+            await _repository.UpdateAsync(Quiz);
 
-            await _repository.UpdateAsync(QuizId);
             return NoContent();
         }
 

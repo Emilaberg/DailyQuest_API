@@ -21,7 +21,7 @@ namespace DataBase.Repositories
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(keyValues);
+            return await _dbSet.FindAsync(id);
         }
 
         public async Task AddAsync(T entity)
@@ -47,10 +47,6 @@ namespace DataBase.Repositories
             }
         }
 
-        public Task<T> GetByIdAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task DeleteAsync(int id)
         {

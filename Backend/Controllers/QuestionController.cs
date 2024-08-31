@@ -41,13 +41,12 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{question}")]
-        public async Task<IActionResult> PutQuestion(QuestionModel question)
+        public async Task PutQuestion(QuestionModel question)
         {
 
 
 
-            await _repository.UpdateAsync(QuestionId);
-            return;
+            await _repository.UpdateAsync(question);
         }
 
 

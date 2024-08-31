@@ -44,7 +44,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //builder.Services.AddDbContext<AppDbContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString(reader.GetValue("ConnectionString"))));
 
-builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
+
 builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
 builder.Services.AddScoped<IMetaTagRepository, MetaTagRepository>();

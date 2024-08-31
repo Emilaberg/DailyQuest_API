@@ -22,10 +22,12 @@ namespace Backend.Controllers
             return Ok(metaTags);
         }
 
+
         [HttpGet("{metaTagId}")]
         public async Task<ActionResult<MetaTagModel>> GetMetaTag(int metaTagId)
         {
             var metaTag = await _repository.GetByIdAsync(metaTagId);
+
             if (metaTag == null)
             {
                 return NotFound();
@@ -37,6 +39,7 @@ namespace Backend.Controllers
         public async Task PostMetaTag(MetaTagModel metaTag)
         {
             await _repository.AddAsync(metaTag);
+
         }
 
         [HttpPut("{metaTag}")]
@@ -44,14 +47,17 @@ namespace Backend.Controllers
         {
 
 
-            await _repository.UpdateAsync(metaTag);
+
+            await _repository.UpdateAsync(MetaTagId);
             return NoContent();
         }
+
 
         [HttpDelete("{metaTagId}")]
         public async Task<IActionResult> DeleteMetaTag(int metaTagId)
         {
             await _repository.DeleteAsync(metaTagId);
+
             return NoContent();
         }
     }

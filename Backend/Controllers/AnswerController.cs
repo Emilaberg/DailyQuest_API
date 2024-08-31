@@ -22,10 +22,12 @@ namespace Backend.Controllers
             return Ok(answers);
         }
 
+
         [HttpGet("{AnswerId}")]
         public async Task<ActionResult<AnswerModel>> GetAnswer(int AnswerId)
         {
             var answer = await _repository.GetByIdAsync(AnswerId);
+
             if (answer == null)
             {
                 return NotFound();
@@ -41,11 +43,10 @@ namespace Backend.Controllers
 
         }
 
+
         [HttpPut("{AnswerId}")]
         public async Task<IActionResult> PutAnswer(AnswerModel AnswerId)
         {
-
-
             await _repository.UpdateAsync(AnswerId);
             return NoContent();
         }
@@ -54,6 +55,7 @@ namespace Backend.Controllers
         public async Task<IActionResult> DeleteAnswer(int AnswerId)
         {
             await _repository.DeleteAsync(AnswerId);
+
             return NoContent();
         }
     }

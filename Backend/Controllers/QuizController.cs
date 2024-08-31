@@ -33,6 +33,7 @@ namespace Backend.Controllers
             return Ok(quizModel);
         }
 
+
         [HttpPost("{Quiz}")]
         public async Task PostQuizModel(QuizModel Quiz)
         {
@@ -43,6 +44,7 @@ namespace Backend.Controllers
         public async Task<IActionResult> PutQuizModel(QuizModel Quiz)
         {
             await _repository.UpdateAsync(Quiz);
+
             return NoContent();
         }
 

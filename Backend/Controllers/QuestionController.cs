@@ -33,6 +33,7 @@ namespace Backend.Controllers
             return Ok(question);
         }
 
+
         [HttpPost("{question}")]
         public async Task PostQuestion(QuestionModel question)
         {
@@ -44,14 +45,17 @@ namespace Backend.Controllers
         {
 
 
-            await _repository.UpdateAsync(question);
-            return NoContent();
+
+            await _repository.UpdateAsync(QuestionId);
+            return;
         }
+
 
         [HttpDelete("{questionId}")]
         public async Task<IActionResult> DeleteQuestion(int questionId)
         {
             await _repository.DeleteAsync(questionId);
+
             return NoContent();
         }
     }

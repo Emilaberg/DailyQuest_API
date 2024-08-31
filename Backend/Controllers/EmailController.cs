@@ -22,6 +22,7 @@ public class EmailController : ControllerBase
         return Ok(emails);
     }
 
+
     [HttpGet("{EmailId}")]
     public async Task<ActionResult<EmailModel>> GetEmail(int EmailId)
     {
@@ -41,6 +42,7 @@ public class EmailController : ControllerBase
         //return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
     }
 
+
     [HttpPut("{email}")]
     public async Task<IActionResult> PutEmail(EmailModel email)
     {
@@ -49,7 +51,9 @@ public class EmailController : ControllerBase
         //    return BadRequest();
         //}
 
+
         await _repository.UpdateAsync(email);
         return NoContent();
+
     }
 }

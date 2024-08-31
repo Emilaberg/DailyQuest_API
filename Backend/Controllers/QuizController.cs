@@ -22,10 +22,10 @@ namespace Backend.Controllers
             return Ok(quizModels);
         }
 
-        [HttpGet("{AnswerId}")]
-        public async Task<ActionResult<QuizModel>> GetQuizModel(int id)
+        [HttpGet("{QuizId}")]
+        public async Task<ActionResult<QuizModel>> GetQuizModel(int QuizId)
         {
-            var quizModel = await _repository.GetByIdAsync(id);
+            var quizModel = await _repository.GetByIdAsync(QuizId);
             if (quizModel == null)
             {
                 return NotFound();
@@ -33,29 +33,23 @@ namespace Backend.Controllers
             return Ok(quizModel);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<QuizModel>> PostQuizModel(QuizModel quizModel)
+        [HttpPost("{Quiz}")]
+        public async Task PostQuizModel(QuizModel Quiz)
         {
-            await _repository.AddAsync(quizModel);
-            return CreatedAtAction(nameof(GetQuizModel), new { id = quizModel.QuizId }, quizModel);
+            await _repository.AddAsync(Quiz);
         }
 
-        [HttpPut("{AnswerId}")]
-        public async Task<IActionResult> PutQuizModel(int id, QuizModel quizModel)
+        [HttpPut("{Quiz}")]
+        public async Task<IActionResult> PutQuizModel(QuizModel Quiz)
         {
-            if (id != quizModel.QuizId)
-            {
-                return BadRequest();
-            }
-
-            await _repository.UpdateAsync(quizModel);
+            await _repository.UpdateAsync(Quiz);
             return NoContent();
         }
 
-        [HttpDelete("{AnswerId}")]
-        public async Task<IActionResult> DeleteQuizModel(int id)
+        [HttpDelete("{QuizId}")]
+        public async Task<IActionResult> DeleteQuizModel(int QuizId)
         {
-            await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(QuizId);
             return NoContent();
         }
     }

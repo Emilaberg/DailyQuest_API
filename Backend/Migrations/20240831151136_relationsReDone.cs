@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class RedidtherelationsofthemodelsintheAppDbContecxt : Migration
+    public partial class relationsReDone : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -140,14 +140,14 @@ namespace Backend.Migrations
                 columns: new[] { "EmailId", "DateLastSent", "Email" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(733), "Maxtharn@gmail.com" },
-                    { 2, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(778), "Nckandero@gmail.com" },
-                    { 3, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(780), "emil.aberg@live.com" },
-                    { 4, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(781), "e.johannesnilsson@gmail.com" },
-                    { 5, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(783), "emmzaa1337@gmail.com" },
-                    { 6, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(784), "Din@Son.lol" },
-                    { 7, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(786), "Din@Kusin.lol" },
-                    { 8, new DateTime(2024, 8, 31, 15, 25, 40, 565, DateTimeKind.Local).AddTicks(787), "oscar.sommerfors@gmail.com" }
+                    { 1, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(824), "Maxtharn@gmail.com" },
+                    { 2, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(863), "Nckandero@gmail.com" },
+                    { 3, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(865), "emil.aberg@live.com" },
+                    { 4, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(867), "e.johannesnilsson@gmail.com" },
+                    { 5, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(868), "emmzaa1337@gmail.com" },
+                    { 6, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(869), "Din@Son.lol" },
+                    { 7, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(870), "Din@Kusin.lol" },
+                    { 8, new DateTime(2024, 8, 31, 17, 11, 35, 889, DateTimeKind.Local).AddTicks(871), "oscar.sommerfors@gmail.com" }
                 });
 
             migrationBuilder.InsertData(

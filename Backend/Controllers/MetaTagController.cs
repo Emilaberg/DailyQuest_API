@@ -48,7 +48,7 @@ namespace Backend.Controllers
 
 
 
-            await _repository.UpdateAsync(MetaTagId);
+            await _repository.UpdateAsync(metaTag);
             return NoContent();
         }
 

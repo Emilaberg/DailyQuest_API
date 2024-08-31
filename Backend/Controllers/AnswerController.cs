@@ -44,10 +44,10 @@ namespace Backend.Controllers
         }
 
 
-        [HttpPut("{AnswerId}")]
-        public async Task<IActionResult> PutAnswer(AnswerModel AnswerId)
+        [HttpPut("{Answer}")]
+        public async Task<IActionResult> PutAnswer(AnswerModel Answer)
         {
-            await _repository.UpdateAsync(AnswerId);
+            await _repository.UpdateAsync(Answer);
             return NoContent();
         }
 

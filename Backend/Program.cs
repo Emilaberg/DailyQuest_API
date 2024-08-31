@@ -1,3 +1,4 @@
+using Backend.MiddleWare;
 using DataBase;
 using DataBase.Repositories;
 using DataBase.Repositories.Interfaces;
@@ -6,7 +7,6 @@ using Microsoft.Extensions.Configuration;
 using Shared;
 using Shared.DbModels;
 using System.Globalization;
-
 
 
 LocalFileReader reader = new();
@@ -53,6 +53,7 @@ builder.Services.AddScoped<IGenericRepository<AnswerModel>, AnswerRepository>();
 builder.Services.AddScoped<IGenericRepository<EmailModel>, EmailRepository>();
 builder.Services.AddScoped<IGenericRepository<QuestionModel>, QuestionRepository>();
 builder.Services.AddScoped<IGenericRepository<MetaTagModel>, MetaTagRepository>();
+builder.Services.AddScoped<LocalFileReader>();
 
 
 
@@ -64,6 +65,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseMiddleware<AdminPassKeyMiddleWare>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

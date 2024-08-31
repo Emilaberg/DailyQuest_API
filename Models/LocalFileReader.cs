@@ -26,7 +26,7 @@ public class LocalFileReader
     public JObject? Json
     {
         get => _json;
-        private set => throw new AccessViolationException("Not Allowed to set the Json variable");
+        set => throw new AccessViolationException("Not Allowed to set the Json variable");
     }
 
     #endregion
@@ -144,6 +144,7 @@ public class LocalFileReader
     /// <summary>
     /// Updates the value of an existing key in the JObject
     /// Returns the value before the update and the value after the update
+    /// If the key does not exist, it returns (default, default)
     /// </summary>
     /// <param name="key">The key</param>
     /// <param name="newValue">The new value</param>
@@ -153,7 +154,8 @@ public class LocalFileReader
         if (_json == null) return (default, default);
         if (newValue == null) return (default, default);
 
-        T? beforeValue = GetValue<T>(key);
+        var beforeValue = GetValue<T>(key);
+        if (beforeValue == null) return (default, default);
 
         try
         {
@@ -167,7 +169,7 @@ public class LocalFileReader
             return (beforeValue, default);
         }
 
-        T? afterValue = GetValue<T>(key);
+        var afterValue = GetValue<T>(key);
         return (beforeValue, afterValue);
     }
 
@@ -188,7 +190,9 @@ public class LocalFileReader
     {
         try
         {
-            File.WriteAllText(_path, _json?.ToString(Formatting.Indented));
+            File.WriteAllText(_tempFilePath, Json?.ToString(Formatting.Indented));
+
+            File.Copy(_tempFilePath, _path, true);
         }
         catch (Exception e)
         {

@@ -34,10 +34,11 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AnswerModel>> PostAnswer(AnswerModel answer)
+        public async Task PostAnswer(AnswerModel answer)
         {
+
             await _repository.AddAsync(answer);
-            return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerId }, answer);
+
         }
 
         [HttpPut("{AnswerId}")]

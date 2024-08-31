@@ -49,6 +49,14 @@ namespace DataBase
                 .WithMany(mt => mt.QuestionMetaTags)
                 .HasForeignKey(qmt => qmt.MetaTagId);
 
+            // Configure the relationship between QuestionModel and AnswerModel
+            modelBuilder.Entity<AnswerModel>()
+                .HasOne(a => a.QuestionModel)
+                .WithMany(q => q.Answers)
+                .HasForeignKey(a => a.QuestionId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
             // Seed Meta Tags
             modelBuilder.Entity<MetaTagModel>().HasData(
                 new MetaTagModel { MetaTagId = 1, TagName = "World of Warcraft" },

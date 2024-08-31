@@ -22,10 +22,10 @@ namespace Backend.Controllers
             return Ok(answers);
         }
 
-        [HttpGet("{AnswerId}")]
-        public async Task<ActionResult<AnswerModel>> GetAnswer(int id)
+        [HttpGet("{answerId}")]
+        public async Task<ActionResult<AnswerModel>> GetAnswer(int answerId)
         {
-            var answer = await _repository.GetByIdAsync(id);
+            var answer = await _repository.GetByIdAsync(answerId);
             if (answer == null)
             {
                 return NotFound();
@@ -34,28 +34,29 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AnswerModel>> PostAnswer(AnswerModel answer)
+        public async Task PostAnswer(AnswerModel answer)
         {
+
             await _repository.AddAsync(answer);
-            return CreatedAtAction(nameof(GetAnswer), new { id = answer.AnswerId }, answer);
+
         }
 
-        [HttpPut("{AnswerId}")]
-        public async Task<IActionResult> PutAnswer(int id, AnswerModel answer)
+        [HttpPut("{answerId}")]
+        public async Task<IActionResult> PutAnswer(AnswerModel answer)
         {
-            if (id != answer.AnswerId)
-            {
-                return BadRequest();
-            }
+            //if (answer.AnswerId)
+            //{
+            //    return BadRequest();
+            //}
 
             await _repository.UpdateAsync(answer);
             return NoContent();
         }
 
-        [HttpDelete("{AnswerId}")]
-        public async Task<IActionResult> DeleteAnswer(int id)
+        [HttpDelete("{answerId}")]
+        public async Task<IActionResult> DeleteAnswer(int answerId)
         {
-            await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(answerId);
             return NoContent();
         }
     }

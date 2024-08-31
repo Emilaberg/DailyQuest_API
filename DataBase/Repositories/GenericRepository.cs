@@ -19,8 +19,7 @@ namespace DataBase.Repositories
             return await _dbSet.ToListAsync();
         }
 
-        // Modified to accept composite keys
-        public async Task<T> GetByIdAsync(params object[] keyValues)
+        public async Task<T?> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(keyValues);
         }

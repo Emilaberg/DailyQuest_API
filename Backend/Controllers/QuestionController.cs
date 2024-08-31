@@ -22,10 +22,10 @@ namespace Backend.Controllers
             return Ok(questions);
         }
 
-        [HttpGet("{AnswerId}")]
-        public async Task<ActionResult<QuestionModel>> GetQuestion(int id)
+        [HttpGet("{QuestionId}")]
+        public async Task<ActionResult<QuestionModel>> GetQuestion(int QuestionId)
         {
-            var question = await _repository.GetByIdAsync(id);
+            var question = await _repository.GetByIdAsync(QuestionId);
             if (question == null)
             {
                 return NotFound();
@@ -34,28 +34,28 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<QuestionModel>> PostQuestion(QuestionModel question)
+        public async Task PostQuestion(QuestionModel question)
         {
             await _repository.AddAsync(question);
-            return CreatedAtAction(nameof(GetQuestion), new { id = question.QuestionId }, question);
+            //return CreatedAtAction(nameof(GetQuestion), new { id = question.QuestionId }, question);
         }
 
-        [HttpPut("{AnswerId}")]
-        public async Task<IActionResult> PutQuestion(int id, QuestionModel question)
+        [HttpPut("{QuestionId}")]
+        public async Task PutQuestion(QuestionModel QuestionId)
         {
-            if (id != question.QuestionId)
-            {
-                return BadRequest();
-            }
+            //if (id != question.QuestionId)
+            //{
+            //    return;
+            //}
 
-            await _repository.UpdateAsync(question);
-            return NoContent();
+            await _repository.UpdateAsync(QuestionId);
+            return;
         }
 
-        [HttpDelete("{AnswerId}")]
-        public async Task<IActionResult> DeleteQuestion(int id)
+        [HttpDelete("{QuestionId}")]
+        public async Task<IActionResult> DeleteQuestion(int QuestionId)
         {
-            await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(QuestionId);
             return NoContent();
         }
     }

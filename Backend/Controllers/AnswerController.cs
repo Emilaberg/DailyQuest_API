@@ -23,9 +23,9 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{AnswerId}")]
-        public async Task<ActionResult<AnswerModel>> GetAnswer(int id)
+        public async Task<ActionResult<AnswerModel>> GetAnswer(int answerID)
         {
-            var answer = await _repository.GetByIdAsync(id);
+            var answer = await _repository.GetByIdAsync(answerID);
             if (answer == null)
             {
                 return NotFound();

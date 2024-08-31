@@ -408,49 +408,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1850),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6797),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1891),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6847),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1893),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6849),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1894),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6851),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1895),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6853),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1896),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6854),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1897),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6856),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1898),
+                            DateLastSent = new DateTime(2024, 8, 31, 15, 19, 12, 836, DateTimeKind.Local).AddTicks(6858),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });

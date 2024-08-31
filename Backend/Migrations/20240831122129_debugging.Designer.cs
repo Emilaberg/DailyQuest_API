@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240828124104_initcreate")]
-    partial class initcreate
+    [Migration("20240831122129_debugging")]
+    partial class debugging
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -411,49 +411,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4353),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1850),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4397),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1891),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4400),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1893),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4402),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1894),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4404),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1895),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4406),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1896),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4408),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1897),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 8, 28, 14, 41, 4, 253, DateTimeKind.Local).AddTicks(4410),
+                            DateLastSent = new DateTime(2024, 8, 31, 14, 21, 29, 270, DateTimeKind.Local).AddTicks(1898),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });

@@ -23,9 +23,9 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{EmailId}")]
-        public async Task<ActionResult<EmailModel>> GetEmail(int emailId)
+        public async Task<ActionResult<EmailModel>> GetEmail(int EmailId)
         {
-            var email = await _repository.GetByIdAsync(emailId);
+            var email = await _repository.GetByIdAsync(EmailId);
             if (email == null)
             {
                 return NotFound();
@@ -34,28 +34,28 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<EmailModel>> PostEmail(EmailModel email)
+        public async Task PostEmail(EmailModel email)
         {
             await _repository.AddAsync(email);
-            return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
+            //return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
         }
 
         [HttpPut("{EmailId}")]
-        public async Task<IActionResult> PutEmail(int id, EmailModel email)
+        public async Task<IActionResult> PutEmail(EmailModel email)
         {
-            if (id != email.EmailId)
-            {
-                return BadRequest();
-            }
+            //if (id != email.EmailId)
+            //{
+            //    return BadRequest();
+            //}
 
             await _repository.UpdateAsync(email);
             return NoContent();
         }
 
         [HttpDelete("{EmailId}")]
-        public async Task<IActionResult> DeleteEmail(int id)
+        public async Task<IActionResult> DeleteEmail(int EmailId)
         {
-            await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(EmailId);
             return NoContent();
         }
     }

@@ -23,9 +23,9 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{QuestionId}")]
-        public async Task<ActionResult<QuestionModel>> GetQuestion(int questionId)
+        public async Task<ActionResult<QuestionModel>> GetQuestion(int QuestionId)
         {
-            var question = await _repository.GetByIdAsync(questionId);
+            var question = await _repository.GetByIdAsync(QuestionId);
             if (question == null)
             {
                 return NotFound();
@@ -41,21 +41,21 @@ namespace Backend.Controllers
         }
 
         [HttpPut("{QuestionId}")]
-        public async Task PutQuestion(int id, QuestionModel question)
+        public async Task PutQuestion(QuestionModel QuestionId)
         {
-            if (id != question.QuestionId)
-            {
-                return;
-            }
+            //if (id != question.QuestionId)
+            //{
+            //    return;
+            //}
 
-            await _repository.UpdateAsync(question);
+            await _repository.UpdateAsync(QuestionId);
             return;
         }
 
         [HttpDelete("{QuestionId}")]
-        public async Task<IActionResult> DeleteQuestion(int id)
+        public async Task<IActionResult> DeleteQuestion(int QuestionId)
         {
-            await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(QuestionId);
             return NoContent();
         }
     }

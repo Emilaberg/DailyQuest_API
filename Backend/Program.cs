@@ -2,7 +2,10 @@ using DataBase;
 using DataBase.Repositories;
 using DataBase.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Shared;
+using Shared.DbModels;
+using System.Globalization;
 
 
 
@@ -44,12 +47,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //builder.Services.AddDbContext<AppDbContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString(reader.GetValue("ConnectionString"))));
 
-
-builder.Services.AddScoped<IQuizRepository, QuizRepository>();
-builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
-builder.Services.AddScoped<IMetaTagRepository, MetaTagRepository>();
-builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
-builder.Services.AddScoped<IEmailRepository, EmailRepository>();
+builder.Services.AddScoped<IGenericRepository<QuizModel>, QuizRepository>();
+//builder.Services.AddScoped<IGenericRepository<QuestionMetaTag>, QuestionMetaTagRepository>();
+builder.Services.AddScoped<IGenericRepository<AnswerModel>, AnswerRepository>();
+builder.Services.AddScoped<IGenericRepository<EmailModel>, EmailRepository>();
+builder.Services.AddScoped<IGenericRepository<QuestionModel>, QuestionRepository>();
+builder.Services.AddScoped<IGenericRepository<MetaTagModel>, MetaTagRepository>();
 
 
 

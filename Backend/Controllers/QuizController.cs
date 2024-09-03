@@ -9,10 +9,12 @@ namespace Backend.Controllers
     public class QuizController : ControllerBase
     {
         private readonly IGenericRepository<QuizModel> _repository;
+        private readonly PassKeyVerifier _passKeyVerifier;
 
-        public QuizController(IGenericRepository<QuizModel> repository)
+        public QuizController(IGenericRepository<QuizModel> repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
+            _passKeyVerifier = passKeyVerifier;
         }
 
         [HttpGet]
@@ -34,22 +36,25 @@ namespace Backend.Controllers
         }
 
 
-        [HttpPost("{Quiz}")]
-        public async Task PostQuizModel(QuizModel Quiz)
+        [HttpPost("{adminPassKey}")]
+        public async Task<IActionResult> PostQuizModel(string? adminPassKey, QuizModel Quiz)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.AddAsync(Quiz);
+            return Ok($"The Quiz: {Quiz.QuizName} was added.");
         }
 
-        [HttpPut("{Quiz}")]
-        public async Task<IActionResult> PutQuizModel(QuizModel Quiz)
+        [HttpPut("{adminPassKey}")]
+        public async Task<IActionResult> PutQuizModel(string? adminPassKey, QuizModel Quiz)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.UpdateAsync(Quiz);
 
             return NoContent();
         }
 
-        [HttpDelete("{QuizId}")]
-        public async Task<IActionResult> DeleteQuizModel(int QuizId)
+        [HttpDelete("{adminPassKey}")]
+        public async Task<IActionResult> DeleteQuizModel(string? adminPassKey, int QuizId)
         {
             await _repository.DeleteAsync(QuizId);
             return NoContent();

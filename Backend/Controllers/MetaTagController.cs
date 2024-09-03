@@ -9,10 +9,12 @@ namespace Backend.Controllers
     public class MetaTagController : ControllerBase
     {
         private readonly IGenericRepository<MetaTagModel> _repository;
+        private readonly PassKeyVerifier _passKeyVerifier;
 
-        public MetaTagController(IGenericRepository<MetaTagModel> repository)
+        public MetaTagController(IGenericRepository<MetaTagModel> repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
+            _passKeyVerifier = passKeyVerifier;
         }
 
         [HttpGet]
@@ -35,27 +37,27 @@ namespace Backend.Controllers
             return Ok(metaTag);
         }
 
-        [HttpPost]
-        public async Task PostMetaTag(MetaTagModel metaTag)
+        [HttpPost("{adminPassKey}")]
+        public async Task<IActionResult> PostMetaTag(string? adminPassKey, MetaTagModel? metaTag)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.AddAsync(metaTag);
-
+            return Ok($"The MetaTag: {metaTag.TagName} was added.");
         }
 
-        [HttpPut("{metaTag}")]
-        public async Task<IActionResult> PutMetaTag(MetaTagModel metaTag)
+        [HttpPut("{adminPassKey}")]
+        public async Task<IActionResult> PutMetaTag(string? adminPassKey, MetaTagModel metaTag)
         {
-
-
-
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.UpdateAsync(metaTag);
             return NoContent();
         }
 
 
-        [HttpDelete("{metaTagId}")]
-        public async Task<IActionResult> DeleteMetaTag(int metaTagId)
+        [HttpDelete("{adminPassKey}")]
+        public async Task<IActionResult> DeleteMetaTag(string? adminPassKey, int metaTagId)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.DeleteAsync(metaTagId);
 
             return NoContent();

@@ -11,6 +11,7 @@ namespace Backend.Controllers
         private readonly IGenericRepository<AnswerModel> _repository;
         private readonly PassKeyVerifier _passKeyVerifier;
 
+
         public AnswerController(IGenericRepository<AnswerModel> repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
@@ -37,25 +38,28 @@ namespace Backend.Controllers
             return Ok(answer);
         }
 
-        [HttpPost("{answer}")]
-        public async Task PostAnswer(AnswerModel answer)
+        [HttpPost("{adminPassKey}")]
+        public async Task<ActionResult> PostAnswer(string? adminPasskey, AnswerModel answer)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
 
             await _repository.AddAsync(answer);
-
+            return Ok($"The Answer: {answer.Answer} was added.");
         }
 
 
-        [HttpPut("{Answer}")]
-        public async Task<IActionResult> PutAnswer(AnswerModel Answer)
+        [HttpPut("{adminPasskey}")]
+        public async Task<IActionResult> PutAnswer(string? adminPasskey, AnswerModel Answer)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.UpdateAsync(Answer);
             return NoContent();
         }
 
-        [HttpDelete("{AnswerId}")]
-        public async Task<IActionResult> DeleteAnswer(int AnswerId)
+        [HttpDelete("{adminPasskey}")]
+        public async Task<IActionResult> DeleteAnswer(string? adminPassKey, int AnswerId)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.DeleteAsync(AnswerId);
 
             return NoContent();

@@ -35,11 +35,13 @@ public class PassKeyVerifier(LocalFileReader reader)
 
     public bool RequestIsAdmin(HttpContext context)
     {
-        if (context.Items.TryGetValue("Admin", out var isAdmin))
-        {
-            return isAdmin is bool && (bool)isAdmin;
-        }
-        return false;
+        string? requestPath = context.Request.Path.ToString();
+
+        string pathEnding = requestPath.LastIndexOf('/') >= 0 ? requestPath.Substring(requestPath.LastIndexOf('/') + 1) : requestPath;
+
+        return VerifyAdminPassKey(pathEnding);
+
+
     }
 }
 

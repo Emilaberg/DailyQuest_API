@@ -41,7 +41,6 @@ if (reader == null || reader.ReadJsonFile() == null) { throw new FileLoadExcepti
 string? connectionString = reader.GetValue<string>("ConnectionString");
 if (connectionString == null) throw new NullReferenceException();
 
-Console.WriteLine("ConnectionString: " + connectionString);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString,
         b => b.MigrationsAssembly("Backend"))); // Specify the migrations assembly here

@@ -22,10 +22,12 @@ namespace Backend.Controllers
             return Ok(metaTags);
         }
 
-        [HttpGet("{AnswerId}")]
-        public async Task<ActionResult<MetaTagModel>> GetMetaTag(int id)
+
+        [HttpGet("{metaTagId}")]
+        public async Task<ActionResult<MetaTagModel>> GetMetaTag(int metaTagId)
         {
-            var metaTag = await _repository.GetByIdAsync(id);
+            var metaTag = await _repository.GetByIdAsync(metaTagId);
+
             if (metaTag == null)
             {
                 return NotFound();
@@ -34,28 +36,28 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<MetaTagModel>> PostMetaTag(MetaTagModel metaTag)
+        public async Task PostMetaTag(MetaTagModel metaTag)
         {
             await _repository.AddAsync(metaTag);
-            return CreatedAtAction(nameof(GetMetaTag), new { id = metaTag.MetaTagId }, metaTag);
+
         }
 
-        [HttpPut("{AnswerId}")]
-        public async Task<IActionResult> PutMetaTag(int id, MetaTagModel metaTag)
+        [HttpPut("{metaTag}")]
+        public async Task<IActionResult> PutMetaTag(MetaTagModel metaTag)
         {
-            if (id != metaTag.MetaTagId)
-            {
-                return BadRequest();
-            }
+
+
 
             await _repository.UpdateAsync(metaTag);
             return NoContent();
         }
 
-        [HttpDelete("{AnswerId}")]
-        public async Task<IActionResult> DeleteMetaTag(int id)
+
+        [HttpDelete("{metaTagId}")]
+        public async Task<IActionResult> DeleteMetaTag(int metaTagId)
         {
-            await _repository.DeleteAsync(id);
+            await _repository.DeleteAsync(metaTagId);
+
             return NoContent();
         }
     }

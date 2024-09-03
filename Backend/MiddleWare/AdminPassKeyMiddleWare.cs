@@ -2,12 +2,16 @@
 
 namespace Backend.MiddleWare
 {
-    public class AdminPassKeyMiddleWare(RequestDelegate next, PassKeyVerifier passKeyVerifier)
+    public class AdminPassKeyMiddleWare
     {
-        private readonly RequestDelegate _next = next;
-        private readonly PassKeyVerifier _passKeyVerifier = passKeyVerifier;
+        private readonly RequestDelegate _next;
+        private readonly PassKeyVerifier _passKeyVerifier;
 
-
+        public AdminPassKeyMiddleWare(RequestDelegate next, PassKeyVerifier passKeyVerifier)
+        {
+            _next = next;
+            _passKeyVerifier = passKeyVerifier;
+        }
 
         public async Task InvokeAsync(HttpContext context)
         {
@@ -19,7 +23,7 @@ namespace Backend.MiddleWare
             }
             if (context.Request.Headers.TryGetValue("AdminPassKey", out var passKey))
             {
-                bool isAdmin = _passKeyVerifier.VerifyPassKey(passKey);
+                bool isAdmin = _passKeyVerifier.VerifyAdminPassKey(passKey);
                 context.Items["Admin"] = isAdmin;
             }
             else

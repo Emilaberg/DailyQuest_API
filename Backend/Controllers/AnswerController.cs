@@ -9,10 +9,12 @@ namespace Backend.Controllers
     public class AnswerController : ControllerBase
     {
         private readonly IGenericRepository<AnswerModel> _repository;
+        private readonly PassKeyVerifier _passKeyVerifier;
 
-        public AnswerController(IGenericRepository<AnswerModel> repository)
+        public AnswerController(IGenericRepository<AnswerModel> repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
+            _passKeyVerifier = passKeyVerifier;
         }
 
         [HttpGet]

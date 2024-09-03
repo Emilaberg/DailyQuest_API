@@ -1,3 +1,4 @@
+using Backend;
 using Backend.MiddleWare;
 using DataBase;
 using DataBase.Repositories;
@@ -8,15 +9,6 @@ using Shared;
 using Shared.DbModels;
 using System.Globalization;
 
-
-LocalFileReader reader = new();
-if (reader.ReadJsonFile() == null)
-{
-    throw new FileLoadException();
-}
-
-string? connectionString = reader.GetValue<string>("ConnectionString");
-if (connectionString == null) throw new NullReferenceException();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,32 +31,34 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddSingleton<LocalFileReader>();
+builder.Services.AddSingleton<PassKeyVerifier>();
+
+// Retrieve the singleton instance of LocalFileReader
+var reader = builder.Services.BuildServiceProvider().GetService<LocalFileReader>();
+if (reader == null || reader.ReadJsonFile() == null) { throw new FileLoadException(); }
+
+string? connectionString = reader.GetValue<string>("ConnectionString");
+if (connectionString == null) throw new NullReferenceException();
+
 Console.WriteLine("ConnectionString: " + connectionString);
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString,
         b => b.MigrationsAssembly("Backend"))); // Specify the migrations assembly here
 
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString(reader.GetValue("ConnectionString"))));
 
 builder.Services.AddScoped<IGenericRepository<QuizModel>, QuizRepository>();
-//builder.Services.AddScoped<IGenericRepository<QuestionMetaTag>, QuestionMetaTagRepository>();
 builder.Services.AddScoped<IGenericRepository<AnswerModel>, AnswerRepository>();
 builder.Services.AddScoped<IGenericRepository<EmailModel>, EmailRepository>();
 builder.Services.AddScoped<IGenericRepository<QuestionModel>, QuestionRepository>();
 builder.Services.AddScoped<IGenericRepository<MetaTagModel>, MetaTagRepository>();
-builder.Services.AddScoped<LocalFileReader>();
 
 
 
 
-builder.Services.AddControllers();
 
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
 app.UseMiddleware<AdminPassKeyMiddleWare>();
 
 // Configure the HTTP request pipeline.
@@ -75,11 +69,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.UseCors("Default");
 
 app.Run();

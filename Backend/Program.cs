@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Shared;
 using Shared.DbModels;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; });
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -46,19 +51,25 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         b => b.MigrationsAssembly("Backend"))); // Specify the migrations assembly here
 
 
-builder.Services.AddScoped<IGenericRepository<QuizModel>, QuizRepository>();
-builder.Services.AddScoped<IGenericRepository<AnswerModel>, AnswerRepository>();
-builder.Services.AddScoped<IGenericRepository<EmailModel>, EmailRepository>();
-builder.Services.AddScoped<IGenericRepository<QuestionModel>, QuestionRepository>();
-builder.Services.AddScoped<IGenericRepository<MetaTagModel>, MetaTagRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
+builder.Services.AddScoped<IEmailRepository, EmailRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IMetaTagRepository, MetaTagRepository>();
+builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
 
 
 
 
 
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-app.UseMiddleware<AdminPassKeyMiddleWare>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -68,10 +79,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.UseCors("Default");
 
 app.Run();
-
 

@@ -8,11 +8,13 @@ namespace Backend.Controllers;
 [ApiController]
 public class EmailController : ControllerBase
 {
-    private readonly IGenericRepository<EmailModel> _repository;
+    private readonly IEmailRepository _repository;
+    private readonly PassKeyVerifier _passKeyVerifier;
 
-    public EmailController(IGenericRepository<EmailModel> repository)
+    public EmailController(IEmailRepository repository, PassKeyVerifier passKeyVerifier)
     {
         _repository = repository;
+        _passKeyVerifier = passKeyVerifier;
     }
 
     [HttpGet]
@@ -26,7 +28,9 @@ public class EmailController : ControllerBase
     [HttpGet("{EmailId}")]
     public async Task<ActionResult<EmailModel>> GetEmail(int EmailId)
     {
-        var email = await _repository.GetByIdAsync(EmailId);
+        if (EmailId <= 0) return BadRequest();
+
+        EmailModel? email = await _repository.GetByIdAsync(EmailId);
         if (email == null)
         {
             return NotFound();
@@ -35,21 +39,19 @@ public class EmailController : ControllerBase
         return Ok(email);
     }
 
-    [HttpPost]
-    public async Task PostEmail(EmailModel email)
+    [HttpPost("{adminPassKey}")]
+    public async Task<ActionResult> PostEmail(string? adminPassKey, EmailModel? email)
     {
+        if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
         await _repository.AddAsync(email);
-        //return CreatedAtAction(nameof(GetEmail), new { id = email.EmailId }, email);
+        return Ok($"The Email: {email.Email} was added.");
     }
 
 
-    [HttpPut("{email}")]
-    public async Task<IActionResult> PutEmail(EmailModel email)
+    [HttpPut("{adminPassKey}")]
+    public async Task<IActionResult> PutEmail(string? adminPassKey, EmailModel? email)
     {
-        //if (id != email.EmailId)
-        //{
-        //    return BadRequest();
-        //}
+        if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
 
 
         await _repository.UpdateAsync(email);

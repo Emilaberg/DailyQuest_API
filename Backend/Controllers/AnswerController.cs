@@ -8,11 +8,14 @@ namespace Backend.Controllers
     [ApiController]
     public class AnswerController : ControllerBase
     {
-        private readonly IGenericRepository<AnswerModel> _repository;
+        private readonly IAnswerRepository _repository;
+        private readonly PassKeyVerifier _passKeyVerifier;
 
-        public AnswerController(IGenericRepository<AnswerModel> repository)
+
+        public AnswerController(IAnswerRepository repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
+            _passKeyVerifier = passKeyVerifier;
         }
 
         [HttpGet]
@@ -35,26 +38,29 @@ namespace Backend.Controllers
             return Ok(answer);
         }
 
-        [HttpPost("{answer}")]
-        public async Task PostAnswer(AnswerModel answer)
+        [HttpPost("{adminPasskey}")]
+        public async Task<ActionResult> PostAnswer(string? adminPasskey, AnswerModel answer)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
 
             await _repository.AddAsync(answer);
-
+            return Ok($"The Answer: {answer.Answer} was added.");
         }
 
 
-        [HttpPut("{Answer}")]
-        public async Task<IActionResult> PutAnswer(AnswerModel Answer)
+        [HttpPut("{adminPasskey}")]
+        public async Task<IActionResult> PutAnswer(string? adminPasskey, AnswerModel Answer)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.UpdateAsync(Answer);
             return NoContent();
         }
 
-        [HttpDelete("{AnswerId}")]
-        public async Task<IActionResult> DeleteAnswer(int AnswerId)
+        [HttpDelete("{answerId}/{adminPasskey}")]
+        public async Task<IActionResult> DeleteAnswer(string? adminPassKey, int answerId)
         {
-            await _repository.DeleteAsync(AnswerId);
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
+            await _repository.DeleteAsync(answerId);
 
             return NoContent();
         }

@@ -8,11 +8,13 @@ namespace Backend.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly IGenericRepository<QuestionModel> _repository;
-
-        public QuestionController(IGenericRepository<QuestionModel> repository)
+        private readonly IQuestionRepository _repository;
+        private readonly PassKeyVerifier _passKeyVerifier;
+        public QuestionController(IQuestionRepository repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
+            _passKeyVerifier = passKeyVerifier;
+
         }
 
         [HttpGet]
@@ -34,27 +36,28 @@ namespace Backend.Controllers
         }
 
 
-        [HttpPost("{question}")]
-        public async Task PostQuestion(QuestionModel question)
+        [HttpPost("{adminPassKey}")]
+        public async Task<IActionResult> PostQuestion(string? adminPassKey, QuestionModel question)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.AddAsync(question);
+            return Ok($"The Question: {question.Question} was added.");
         }
 
-        [HttpPut("{question}")]
-        public async Task PutQuestion(QuestionModel question)
+        [HttpPut("{adminPassKey}")]
+        public async Task<IActionResult> PutQuestion(string? adminPassKey, QuestionModel question)
         {
-
-
-
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.UpdateAsync(question);
+            return Ok("The value was edited");
         }
 
 
-        [HttpDelete("{questionId}")]
-        public async Task<IActionResult> DeleteQuestion(int questionId)
+        [HttpDelete("{questionId}/{adminPassKey}")]
+        public async Task<IActionResult> DeleteQuestion(string? adminPassKey, int questionId)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.DeleteAsync(questionId);
-
             return NoContent();
         }
     }

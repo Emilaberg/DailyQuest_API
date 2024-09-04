@@ -8,6 +8,7 @@ public class QuestionModel
     public int QuestionId { get; set; }
 
     public string Question { get; set; } = null!;
+    public string? Image { get; set; }
 
     public List<AnswerModel> Answers { get; set; } = new();
 

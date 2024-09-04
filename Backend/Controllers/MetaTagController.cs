@@ -8,10 +8,10 @@ namespace Backend.Controllers
     [ApiController]
     public class MetaTagController : ControllerBase
     {
-        private readonly IGenericRepository<MetaTagModel> _repository;
+        private readonly IMetaTagRepository _repository;
         private readonly PassKeyVerifier _passKeyVerifier;
 
-        public MetaTagController(IGenericRepository<MetaTagModel> repository, PassKeyVerifier passKeyVerifier)
+        public MetaTagController(IMetaTagRepository repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
             _passKeyVerifier = passKeyVerifier;
@@ -54,7 +54,7 @@ namespace Backend.Controllers
         }
 
 
-        [HttpDelete("{adminPassKey}")]
+        [HttpDelete("{metaTagId}/{adminPassKey}")]
         public async Task<IActionResult> DeleteMetaTag(string? adminPassKey, int metaTagId)
         {
             if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }

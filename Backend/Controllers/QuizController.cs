@@ -8,13 +8,20 @@ namespace Backend.Controllers
     [ApiController]
     public class QuizController : ControllerBase
     {
-        private readonly IGenericRepository<QuizModel> _repository;
+        private readonly IQuizRepository _repository;
         private readonly PassKeyVerifier _passKeyVerifier;
+        private readonly IQuestionRepository _questionRepo;
+        private readonly IQuizQuestionRepository _quizQuestionRepo;
 
-        public QuizController(IGenericRepository<QuizModel> repository, PassKeyVerifier passKeyVerifier)
+        public QuizController(IQuizRepository repository,
+            PassKeyVerifier passKeyVerifier,
+            IQuestionRepository questionRepo,
+            IQuizQuestionRepository quizQuestionRepo)
         {
             _repository = repository;
             _passKeyVerifier = passKeyVerifier;
+            _questionRepo = questionRepo;
+            _quizQuestionRepo = quizQuestionRepo;
         }
 
         [HttpGet]
@@ -25,14 +32,10 @@ namespace Backend.Controllers
         }
 
         [HttpGet("{QuizId}")]
-        public async Task<ActionResult<QuizModel>> GetQuizModel(int QuizId)
+        public async Task<ActionResult<QuizModel?>> GetQuizModel(int QuizId)
         {
-            var quizModel = await _repository.GetByIdAsync(QuizId);
-            if (quizModel == null)
-            {
-                return NotFound();
-            }
-            return Ok(quizModel);
+            return Ok(await _repository.GetByIdAsync_EagerLoading(QuizId));
+
         }
 
 
@@ -53,7 +56,7 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{adminPassKey}")]
+        [HttpDelete("{QuizId}/{adminPassKey}")]
         public async Task<IActionResult> DeleteQuizModel(string? adminPassKey, int QuizId)
         {
             await _repository.DeleteAsync(QuizId);

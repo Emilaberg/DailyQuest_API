@@ -8,9 +8,9 @@ namespace Backend.Controllers
     [ApiController]
     public class QuestionController : ControllerBase
     {
-        private readonly IGenericRepository<QuestionModel> _repository;
+        private readonly IQuestionRepository _repository;
         private readonly PassKeyVerifier _passKeyVerifier;
-        public QuestionController(IGenericRepository<QuestionModel> repository, PassKeyVerifier passKeyVerifier)
+        public QuestionController(IQuestionRepository repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
             _passKeyVerifier = passKeyVerifier;
@@ -53,7 +53,7 @@ namespace Backend.Controllers
         }
 
 
-        [HttpDelete("{adminPassKey}")]
+        [HttpDelete("{questionId}/{adminPassKey}")]
         public async Task<IActionResult> DeleteQuestion(string? adminPassKey, int questionId)
         {
             if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }

@@ -8,10 +8,10 @@ namespace Backend.Controllers;
 [ApiController]
 public class EmailController : ControllerBase
 {
-    private readonly IGenericRepository<EmailModel> _repository;
+    private readonly IEmailRepository _repository;
     private readonly PassKeyVerifier _passKeyVerifier;
 
-    public EmailController(IGenericRepository<EmailModel> repository, PassKeyVerifier passKeyVerifier)
+    public EmailController(IEmailRepository repository, PassKeyVerifier passKeyVerifier)
     {
         _repository = repository;
         _passKeyVerifier = passKeyVerifier;

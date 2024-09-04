@@ -8,11 +8,11 @@ namespace Backend.Controllers
     [ApiController]
     public class AnswerController : ControllerBase
     {
-        private readonly IGenericRepository<AnswerModel> _repository;
+        private readonly IAnswerRepository _repository;
         private readonly PassKeyVerifier _passKeyVerifier;
 
 
-        public AnswerController(IGenericRepository<AnswerModel> repository, PassKeyVerifier passKeyVerifier)
+        public AnswerController(IAnswerRepository repository, PassKeyVerifier passKeyVerifier)
         {
             _repository = repository;
             _passKeyVerifier = passKeyVerifier;
@@ -38,7 +38,7 @@ namespace Backend.Controllers
             return Ok(answer);
         }
 
-        [HttpPost("{adminPassKey}")]
+        [HttpPost("{adminPasskey}")]
         public async Task<ActionResult> PostAnswer(string? adminPasskey, AnswerModel answer)
         {
             if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
@@ -56,11 +56,11 @@ namespace Backend.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{adminPasskey}")]
-        public async Task<IActionResult> DeleteAnswer(string? adminPassKey, int AnswerId)
+        [HttpDelete("{answerId}/{adminPasskey}")]
+        public async Task<IActionResult> DeleteAnswer(string? adminPassKey, int answerId)
         {
             if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
-            await _repository.DeleteAsync(AnswerId);
+            await _repository.DeleteAsync(answerId);
 
             return NoContent();
         }

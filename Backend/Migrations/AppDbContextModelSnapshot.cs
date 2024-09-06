@@ -385,6 +385,7 @@ namespace Backend.Migrations
                         },
                         new
                         {
+
                             AnswerId = 49,
                             Answer = "Inscription",
                             IsCorrect = true,

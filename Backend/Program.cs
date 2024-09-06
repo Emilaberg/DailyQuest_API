@@ -1,3 +1,5 @@
+using Backend;
+using Backend.MiddleWare;
 using DataBase;
 using DataBase.Repositories;
 using DataBase.Repositories.Interfaces;
@@ -6,17 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Shared;
 using Shared.DbModels;
 using System.Globalization;
+using System.Text.Json.Serialization;
 
-
-
-LocalFileReader reader = new();
-if (reader.ReadJsonFile() == null)
-{
-    throw new FileLoadException();
-}
-
-string? connectionString = reader.GetValue("ConnectionString");
-if (connectionString == null) throw new NullReferenceException();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +17,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+        { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; });
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -39,20 +36,29 @@ builder.Services.AddCors(options =>
     });
 });
 
-Console.WriteLine("ConnectionString: " + connectionString);
+builder.Services.AddSingleton<LocalFileReader>();
+builder.Services.AddSingleton<PassKeyVerifier>();
+
+// Retrieve the singleton instance of LocalFileReader
+var reader = builder.Services.BuildServiceProvider().GetService<LocalFileReader>();
+if (reader == null || reader.ReadJsonFile() == null) { throw new FileLoadException(); }
+
+string? connectionString = reader.GetValue<string>("ConnectionString");
+if (connectionString == null) throw new NullReferenceException();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString,
         b => b.MigrationsAssembly("Backend"))); // Specify the migrations assembly here
 
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString(reader.GetValue("ConnectionString"))));
 
-builder.Services.AddScoped<IGenericRepository<QuizModel>, QuizRepository>();
-//builder.Services.AddScoped<IGenericRepository<QuestionMetaTag>, QuestionMetaTagRepository>();
-builder.Services.AddScoped<IGenericRepository<AnswerModel>, AnswerRepository>();
-builder.Services.AddScoped<IGenericRepository<EmailModel>, EmailRepository>();
-builder.Services.AddScoped<IGenericRepository<QuestionModel>, QuestionRepository>();
-builder.Services.AddScoped<IGenericRepository<MetaTagModel>, MetaTagRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IAnswerRepository, AnswerRepository>();
+builder.Services.AddScoped<IEmailRepository, EmailRepository>();
+builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();
+builder.Services.AddScoped<IMetaTagRepository, MetaTagRepository>();
+builder.Services.AddScoped<IQuizQuestionRepository, QuizQuestionRepository>();
+builder.Services.AddScoped<IQuizRepository, QuizRepository>();
+
 
 
 
@@ -81,5 +87,4 @@ app.MapControllers();
 app.UseCors("Default");
 
 app.Run();
-
 

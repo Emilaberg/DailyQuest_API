@@ -1,4 +1,5 @@
 ﻿using DataBase.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Shared.DbModels;
 
 namespace DataBase.Repositories
@@ -7,6 +8,15 @@ namespace DataBase.Repositories
     {
         public QuizRepository(AppDbContext context) : base(context)
         {
+        }
+
+        public async Task<QuizModel?> GetByIdAsync_EagerLoading(int id)
+        {
+            return await _dbSet
+                .Include(quiz => quiz.QuizQuestions)
+                .ThenInclude(quizQuestion => quizQuestion.Question)
+                .ThenInclude(question => question.Answers)
+                .FirstOrDefaultAsync(quiz => quiz.QuizId == id);
         }
     }
 }

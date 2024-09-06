@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240906094329_Seed Quiz Data")]
-    partial class SeedQuizData
+    [Migration("20240906100309_more seeded data")]
+    partial class moreseededdata
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2595,49 +2595,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9466),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(888),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9514),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(928),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9517),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(929),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9519),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(930),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9521),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(932),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9522),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(933),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9524),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(934),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 9, 6, 11, 43, 29, 5, DateTimeKind.Local).AddTicks(9526),
+                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(935),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });
@@ -3164,6 +3164,9 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuestionId"));
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Question")
                         .IsRequired()

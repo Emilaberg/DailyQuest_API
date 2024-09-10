@@ -1,5 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shared.DbModels;
+using System.Diagnostics;
+using System.Security.Claims;
+using Xunit;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DataBase
 {
@@ -82,22 +86,22 @@ namespace DataBase
 
             // Questions
             modelBuilder.Entity<QuestionModel>().HasData(
-                // World of Warcraft Questions
-                new QuestionModel { QuestionId = 1, Question = "What is the capital city of the Horde?" },
-                new QuestionModel { QuestionId = 2, Question = "Who is the Warchief after Thrall?" },
-                new QuestionModel { QuestionId = 3, Question = "What class was introduced in 'The Burning Crusade'?" },
-                new QuestionModel { QuestionId = 4, Question = "Which expansion featured the continent of Pandaria?" },
-                new QuestionModel { QuestionId = 5, Question = "What is the name of the Lich King's sword?" },
-                new QuestionModel { QuestionId = 6, Question = "Who guards the Caverns of Time?" },
-                new QuestionModel { QuestionId = 7, Question = "Which race can choose to be either Horde or Alliance?" },
-                new QuestionModel { QuestionId = 8, Question = "What material is needed to craft a Thunderfury?" },
-                new QuestionModel { QuestionId = 9, Question = "Who did players fight in the Firelands raid?" },
-                new QuestionModel { QuestionId = 10, Question = "Which dragon aspect is responsible for the Emerald Dream?" },
-                new QuestionModel { QuestionId = 11, Question = "What was the first battleground introduced in WoW?" },
-                new QuestionModel { QuestionId = 12, Question = "Which raid includes the fight against Illidan?" },
-                new QuestionModel { QuestionId = 13, Question = "What profession deals with glyphs?" },
-                new QuestionModel { QuestionId = 14, Question = "Where is the Dark Portal located?" },
-                new QuestionModel { QuestionId = 15, Question = "What is the home planet of the Draenei?" },
+            // World of Warcraft Questions
+                new QuestionModel { QuestionId = 1, Question = "What is the capital city of the Horde?", Image = """..src/assets/images/Cities WoW.webp""" },
+                new QuestionModel { QuestionId = 2, Question = "Who is the Warchief after Thrall?", Image = """..src/assets/images/ORC.webp""" },
+                new QuestionModel { QuestionId = 3, Question = "What class was introduced in 'The Burning Crusade'?", Image = """..src/assets/images/World_of_Warcraft_The_Burning_Crusade.png""" },
+                new QuestionModel { QuestionId = 4, Question = "Which expansion featured the continent of Pandaria?", Image = """..src/assets/images/WorldMap - Pandaria.webp""" },
+                new QuestionModel { QuestionId = 5, Question = "What is the name of the Lich King's sword?", Image = """..src/assets/images/FrostMorn.png""" },
+                new QuestionModel { QuestionId = 6, Question = "Who guards the Caverns of Time?", Image = """..src/assets/images/FrostMorn.png""" },
+                new QuestionModel { QuestionId = 7, Question = "Which race can choose to be either Horde or Alliance?", Image = """..src/assets/images/Class.jpg""" },
+                new QuestionModel { QuestionId = 8, Question = "What material is needed to craft a Thunderfury?", Image = """..src/assets/images/ThunderFury.png""" },
+                new QuestionModel { QuestionId = 9, Question = "Who did players fight in the Firelands raid?", Image = """..src/assets/images/ThunderFury.png""" },
+                new QuestionModel { QuestionId = 10, Question = "Which dragon aspect is responsible for the Emerald Dream?", Image = """..src/assets/images/dragon.jpg""" },
+                new QuestionModel { QuestionId = 11, Question = "What was the first battleground introduced in WoW?", Image = """..src/assets/images/WSG.webp""" },
+                new QuestionModel { QuestionId = 12, Question = "Which raid includes the fight against Illidan?", Image = """..src/assets/images/Illidan_the_Betrayer.webp""" },
+                new QuestionModel { QuestionId = 13, Question = "What profession deals with glyphs?", Image = """..src/assets/images/glyphs.webp""" },
+                new QuestionModel { QuestionId = 14, Question = "Where is the Dark Portal located?", Image = """..src/assets/images/DarkPortal.webp""" },
+                new QuestionModel { QuestionId = 15, Question = "What is the home planet of the Draenei?", Image = """..src/assets/images/Dranei.webp""" },
 
                 // League of Legends Questions
                 new QuestionModel { QuestionId = 16, Question = "Which champion has an ability called 'Cataclysm'?" },

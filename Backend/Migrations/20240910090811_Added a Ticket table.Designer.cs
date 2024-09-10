@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240906100309_more seeded data")]
-    partial class moreseededdata
+    [Migration("20240910090811_Added a Ticket table")]
+    partial class AddedaTickettable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -2589,55 +2589,55 @@ namespace Backend.Migrations
 
                     b.HasKey("EmailId");
 
-                    b.ToTable("EmailModels");
+                    b.ToTable("Emails");
 
                     b.HasData(
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(888),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7187),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(928),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7228),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(929),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7229),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(930),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7231),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(932),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7232),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(933),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7234),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(934),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7235),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(935),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7236),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });
@@ -3642,7 +3642,7 @@ namespace Backend.Migrations
 
                     b.HasKey("QuizId");
 
-                    b.ToTable("QuizModels");
+                    b.ToTable("Quizzes");
 
                     b.HasData(
                         new
@@ -4222,6 +4222,34 @@ namespace Backend.Migrations
                             QuizId = 7,
                             QuestionId = 35
                         });
+                });
+
+            modelBuilder.Entity("Shared.DbModels.TicketModel", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Shared.DbModels.AnswerModel", b =>

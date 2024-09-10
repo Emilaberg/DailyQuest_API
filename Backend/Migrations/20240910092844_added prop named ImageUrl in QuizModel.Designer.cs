@@ -4,6 +4,7 @@ using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240910092844_added prop named ImageUrl in QuizModel")]
+    partial class addedpropnamedImageUrlinQuizModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2592,49 +2595,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8208),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3385),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8253),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3432),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8255),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3434),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8257),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3435),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8258),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3436),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8259),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3437),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8260),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3439),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 9, 10, 14, 28, 10, 967, DateTimeKind.Local).AddTicks(8262),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3440),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });
@@ -3177,91 +3180,76 @@ namespace Backend.Migrations
                         new
                         {
                             QuestionId = 1,
-                            Image = "..src/assets/images/Cities WoW.webp",
                             Question = "What is the capital city of the Horde?"
                         },
                         new
                         {
                             QuestionId = 2,
-                            Image = "..src/assets/images/ORC.webp",
                             Question = "Who is the Warchief after Thrall?"
                         },
                         new
                         {
                             QuestionId = 3,
-                            Image = "..src/assets/images/World_of_Warcraft_The_Burning_Crusade.png",
                             Question = "What class was introduced in 'The Burning Crusade'?"
                         },
                         new
                         {
                             QuestionId = 4,
-                            Image = "..src/assets/images/WorldMap - Pandaria.webp",
                             Question = "Which expansion featured the continent of Pandaria?"
                         },
                         new
                         {
                             QuestionId = 5,
-                            Image = "..src/assets/images/FrostMorn.png",
                             Question = "What is the name of the Lich King's sword?"
                         },
                         new
                         {
                             QuestionId = 6,
-                            Image = "..src/assets/images/FrostMorn.png",
                             Question = "Who guards the Caverns of Time?"
                         },
                         new
                         {
                             QuestionId = 7,
-                            Image = "..src/assets/images/Class.jpg",
                             Question = "Which race can choose to be either Horde or Alliance?"
                         },
                         new
                         {
                             QuestionId = 8,
-                            Image = "..src/assets/images/ThunderFury.png",
                             Question = "What material is needed to craft a Thunderfury?"
                         },
                         new
                         {
                             QuestionId = 9,
-                            Image = "..src/assets/images/ThunderFury.png",
                             Question = "Who did players fight in the Firelands raid?"
                         },
                         new
                         {
                             QuestionId = 10,
-                            Image = "..src/assets/images/dragon.jpg",
                             Question = "Which dragon aspect is responsible for the Emerald Dream?"
                         },
                         new
                         {
                             QuestionId = 11,
-                            Image = "..src/assets/images/WSG.webp",
                             Question = "What was the first battleground introduced in WoW?"
                         },
                         new
                         {
                             QuestionId = 12,
-                            Image = "..src/assets/images/Illidan_the_Betrayer.webp",
                             Question = "Which raid includes the fight against Illidan?"
                         },
                         new
                         {
                             QuestionId = 13,
-                            Image = "..src/assets/images/glyphs.webp",
                             Question = "What profession deals with glyphs?"
                         },
                         new
                         {
                             QuestionId = 14,
-                            Image = "..src/assets/images/DarkPortal.webp",
                             Question = "Where is the Dark Portal located?"
                         },
                         new
                         {
                             QuestionId = 15,
-                            Image = "..src/assets/images/Dranei.webp",
                             Question = "What is the home planet of the Draenei?"
                         },
                         new

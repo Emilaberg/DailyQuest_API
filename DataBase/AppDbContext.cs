@@ -7,15 +7,17 @@ namespace DataBase
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+
         }
 
         public DbSet<QuestionModel> Questions { get; set; }
         public DbSet<AnswerModel> Answers { get; set; }
         public DbSet<MetaTagModel> MetaTags { get; set; }
-        public DbSet<QuizModel> QuizModels { get; set; }
-        public DbSet<EmailModel> EmailModels { get; set; }
+        public DbSet<QuizModel> Quizzes { get; set; }
+        public DbSet<EmailModel> Emails { get; set; }
         public DbSet<QuizQuestion> QuizQuestions { get; set; }
         public DbSet<QuestionMetaTag> QuestionMetaTags { get; set; }
+        public DbSet<TicketModel> Tickets { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

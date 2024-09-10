@@ -4,6 +4,7 @@ using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240910090811_Added a Ticket table")]
+    partial class AddedaTickettable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2592,49 +2595,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3385),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7187),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3432),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7228),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3434),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7229),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3435),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7231),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3436),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7232),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3437),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7234),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3439),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7235),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 9, 10, 11, 28, 44, 172, DateTimeKind.Local).AddTicks(3440),
+                            DateLastSent = new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7236),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });
@@ -3633,9 +3636,6 @@ namespace Backend.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuizId"));
-
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QuizName")
                         .HasColumnType("nvarchar(max)");

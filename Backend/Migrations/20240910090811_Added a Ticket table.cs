@@ -8,13 +8,13 @@ using System;
 namespace Backend.Migrations
 {
     /// <inheritdoc />
-    public partial class moreseededdata : Migration
+    public partial class AddedaTickettable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "EmailModels",
+                name: "Emails",
                 columns: table => new
                 {
                     EmailId = table.Column<int>(type: "int", nullable: false)
@@ -24,7 +24,7 @@ namespace Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EmailModels", x => x.EmailId);
+                    table.PrimaryKey("PK_Emails", x => x.EmailId);
                 });
 
             migrationBuilder.CreateTable(
@@ -55,7 +55,7 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "QuizModels",
+                name: "Quizzes",
                 columns: table => new
                 {
                     QuizId = table.Column<int>(type: "int", nullable: false)
@@ -64,7 +64,23 @@ namespace Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_QuizModels", x => x.QuizId);
+                    table.PrimaryKey("PK_Quizzes", x => x.QuizId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tickets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TimeStamp = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tickets", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -129,26 +145,26 @@ namespace Backend.Migrations
                         principalColumn: "QuestionId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_QuizQuestions_QuizModels_QuizId",
+                        name: "FK_QuizQuestions_Quizzes_QuizId",
                         column: x => x.QuizId,
-                        principalTable: "QuizModels",
+                        principalTable: "Quizzes",
                         principalColumn: "QuizId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
-                table: "EmailModels",
+                table: "Emails",
                 columns: new[] { "EmailId", "DateLastSent", "Email" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(888), "Maxtharn@gmail.com" },
-                    { 2, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(928), "Nckandero@gmail.com" },
-                    { 3, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(929), "emil.aberg@live.com" },
-                    { 4, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(930), "e.johannesnilsson@gmail.com" },
-                    { 5, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(932), "emmzaa1337@gmail.com" },
-                    { 6, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(933), "Din@Son.lol" },
-                    { 7, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(934), "Din@Kusin.lol" },
-                    { 8, new DateTime(2024, 9, 6, 12, 3, 8, 992, DateTimeKind.Local).AddTicks(935), "oscar.sommerfors@gmail.com" }
+                    { 1, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7187), "Maxtharn@gmail.com" },
+                    { 2, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7228), "Nckandero@gmail.com" },
+                    { 3, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7229), "emil.aberg@live.com" },
+                    { 4, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7231), "e.johannesnilsson@gmail.com" },
+                    { 5, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7232), "emmzaa1337@gmail.com" },
+                    { 6, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7234), "Din@Son.lol" },
+                    { 7, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7235), "Din@Kusin.lol" },
+                    { 8, new DateTime(2024, 9, 10, 11, 8, 11, 133, DateTimeKind.Local).AddTicks(7236), "oscar.sommerfors@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -262,7 +278,7 @@ namespace Backend.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "QuizModels",
+                table: "Quizzes",
                 columns: new[] { "QuizId", "QuizName" },
                 values: new object[,]
                 {
@@ -874,7 +890,7 @@ namespace Backend.Migrations
                 name: "Answers");
 
             migrationBuilder.DropTable(
-                name: "EmailModels");
+                name: "Emails");
 
             migrationBuilder.DropTable(
                 name: "QuestionMetaTags");
@@ -883,13 +899,16 @@ namespace Backend.Migrations
                 name: "QuizQuestions");
 
             migrationBuilder.DropTable(
+                name: "Tickets");
+
+            migrationBuilder.DropTable(
                 name: "MetaTags");
 
             migrationBuilder.DropTable(
                 name: "Questions");
 
             migrationBuilder.DropTable(
-                name: "QuizModels");
+                name: "Quizzes");
         }
     }
 }

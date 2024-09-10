@@ -48,7 +48,7 @@ if (connectionString == null) throw new NullReferenceException();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionString,
-        b => b.MigrationsAssembly("Backend"))); // Specify the migrations assembly here
+        b => b.MigrationsAssembly("Backend").EnableRetryOnFailure())); // Specify the migrations assembly here
 
 
 builder.Services.AddScoped<IQuestionRepository, QuestionRepository>();

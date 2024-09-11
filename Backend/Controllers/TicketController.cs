@@ -30,7 +30,7 @@ public class TicketController : ControllerBase
     }
 
 
-    [HttpPost("{adminPssKey}")]
+    [HttpPost("{adminPassKey}")]
     public async Task<IActionResult> PostTicket(string? adminPassKey, string email, string subject, string message)
     {
         if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }

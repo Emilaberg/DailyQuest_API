@@ -75,13 +75,13 @@ namespace DataBase
 
             // Quizzes
             modelBuilder.Entity<QuizModel>().HasData(
-             new QuizModel { QuizId = 1, QuizName = "World of Warcraft Quiz", ImageUrl = """/src/assets/images/cards/world-of-warcraft.png""" },
-             new QuizModel { QuizId = 2, QuizName = "League of Legends Quiz", ImageUrl = """/src/assets/images/LeaguefLegends.webp""" },
-             new QuizModel { QuizId = 3, QuizName = "Pokemon Quiz", ImageUrl = """/src/assets/images/Pokemon.jpeg""" },
-             new QuizModel { QuizId = 4, QuizName = "Counter-Strike Quiz", ImageUrl = """/src/assets/images/CS.jpeg""" },
-             new QuizModel { QuizId = 5, QuizName = "Super Mario Quiz", ImageUrl = """/src/assets/images/cards/Super_mario.png""" },
-             new QuizModel { QuizId = 6, QuizName = "The Legend of Zelda Quiz", ImageUrl = """/src/assets/images/Zelda.jpg""" },
-             new QuizModel { QuizId = 7, QuizName = "Mixed Game Quiz", ImageUrl = """/src/assets/images/MixedQuiz.webp""" }
+             new QuizModel { QuizId = 1, QuizName = "World of Warcraft Quiz", ImageUrl = """../src/assets/images/cards/world-of-warcraft.png""", },
+             new QuizModel { QuizId = 2, QuizName = "League of Legends Quiz", ImageUrl = """../src/assets/images/LeaguefLegends.webp""" },
+             new QuizModel { QuizId = 3, QuizName = "Pokemon Quiz", ImageUrl = """../src/assets/images/Pokemon.jpeg""" },
+             new QuizModel { QuizId = 4, QuizName = "Counter-Strike Quiz", ImageUrl = """../src/assets/images/CS.jpeg""" },
+             new QuizModel { QuizId = 5, QuizName = "Super Mario Quiz", ImageUrl = """../src/assets/images/cards/Super_mario.png""" },
+             new QuizModel { QuizId = 6, QuizName = "The Legend of Zelda Quiz", ImageUrl = """../src/assets/images/Zelda.jpg""" },
+             new QuizModel { QuizId = 7, QuizName = "Mixed Game Quiz", ImageUrl = """../src/assets/images/MixedQuiz.webp""" }
 );
 
             // Questions

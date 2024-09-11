@@ -4,6 +4,7 @@ using Shared.DbModels;
 
 namespace Backend.Controllers;
 
+
 [Route("api/[controller]")]
 [ApiController]
 public class TicketController : ControllerBase
@@ -31,31 +32,17 @@ public class TicketController : ControllerBase
 
 
     [HttpPost("{adminPassKey}")]
-    public async Task<IActionResult> PostTicket(string? adminPassKey, string email, string subject, string message)
+    public async Task<IActionResult> PostTicket(string? adminPassKey, TicketModel ticket)
     {
         if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
-        TicketModel ticket = new TicketModel
-        {
-            Email = email,
-            Subject = subject,
-            Message = message,
-            TimeStamp = DateTime.Now
-        };
         await _ticketRepository.AddAsync(ticket);
         return Ok("Ticket saved successfully.");
     }
 
     [HttpPut("{adminPassKey}")]
-    public async Task<IActionResult> PutTicket(string? adminPassKey, string email, string subject, string message)
+    public async Task<IActionResult> PutTicket(string? adminPassKey, TicketModel ticket)
     {
         if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
-        TicketModel ticket = new TicketModel
-        {
-            Email = email,
-            Subject = subject,
-            Message = message,
-            TimeStamp = DateTime.Now
-        };
         await _ticketRepository.UpdateAsync(ticket);
         return Ok("Ticket updated successfully.");
     }

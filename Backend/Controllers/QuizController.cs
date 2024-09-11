@@ -59,6 +59,7 @@ namespace Backend.Controllers
         [HttpDelete("{QuizId}/{adminPassKey}")]
         public async Task<IActionResult> DeleteQuizModel(string? adminPassKey, int QuizId)
         {
+            if (!_passKeyVerifier.RequestIsAdmin(HttpContext)) { return Unauthorized(); }
             await _repository.DeleteAsync(QuizId);
             return NoContent();
         }

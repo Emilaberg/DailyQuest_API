@@ -4,6 +4,7 @@ using DataBase;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Backend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240911113936_Added Description and QuizChallenge")]
+    partial class AddedDescriptionandQuizChallenge
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -2592,49 +2595,49 @@ namespace Backend.Migrations
                         new
                         {
                             EmailId = 1,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3398),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1170),
                             Email = "Maxtharn@gmail.com"
                         },
                         new
                         {
                             EmailId = 2,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3441),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1214),
                             Email = "Nckandero@gmail.com"
                         },
                         new
                         {
                             EmailId = 3,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3443),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1217),
                             Email = "emil.aberg@live.com"
                         },
                         new
                         {
                             EmailId = 4,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3445),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1219),
                             Email = "e.johannesnilsson@gmail.com"
                         },
                         new
                         {
                             EmailId = 5,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3447),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1221),
                             Email = "emmzaa1337@gmail.com"
                         },
                         new
                         {
                             EmailId = 6,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3449),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1223),
                             Email = "Din@Son.lol"
                         },
                         new
                         {
                             EmailId = 7,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3451),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1224),
                             Email = "Din@Kusin.lol"
                         },
                         new
                         {
                             EmailId = 8,
-                            DateLastSent = new DateTime(2024, 9, 11, 14, 21, 34, 549, DateTimeKind.Local).AddTicks(3453),
+                            DateLastSent = new DateTime(2024, 9, 11, 13, 39, 36, 367, DateTimeKind.Local).AddTicks(1226),
                             Email = "oscar.sommerfors@gmail.com"
                         });
                 });
@@ -3692,7 +3695,7 @@ namespace Backend.Migrations
                         new
                         {
                             QuizId = 2,
-                            ImageUrl = "../src/assets/images/LeagueOfLegends.webp",
+                            ImageUrl = "../src/assets/images/LeaguefLegends.webp",
                             QuizChallenge = "Prove your knowledge of champions, game mechanics, and legendary plays from the Summoner's Rift in this thrilling League of Legends quiz.",
                             QuizDescription = "A fast-paced multiplayer online battle arena (MOBA) where two teams of champions face off to destroy each other's Nexus.",
                             QuizName = "League of Legends Quiz"
@@ -3708,7 +3711,7 @@ namespace Backend.Migrations
                         new
                         {
                             QuizId = 4,
-                            ImageUrl = "../src/assets/images/CS.jpg",
+                            ImageUrl = "../src/assets/images/CS.jpeg",
                             QuizChallenge = "Show off your tactical knowledge, map awareness, and weapon expertise in this intense Counter-Strike quiz.",
                             QuizDescription = "A tactical first-person shooter that pits teams of terrorists and counter-terrorists against each other in intense, strategic combat.",
                             QuizName = "Counter-Strike Quiz"

@@ -75,13 +75,63 @@ namespace DataBase
 
             // Quizzes
             modelBuilder.Entity<QuizModel>().HasData(
-             new QuizModel { QuizId = 1, QuizName = "World of Warcraft Quiz", ImageUrl = """../src/assets/images/cards/world-of-warcraft.png""", },
-             new QuizModel { QuizId = 2, QuizName = "League of Legends Quiz", ImageUrl = """../src/assets/images/LeaguefLegends.webp""" },
-             new QuizModel { QuizId = 3, QuizName = "Pokemon Quiz", ImageUrl = """../src/assets/images/Pokemon.jpeg""" },
-             new QuizModel { QuizId = 4, QuizName = "Counter-Strike Quiz", ImageUrl = """../src/assets/images/CS.jpeg""" },
-             new QuizModel { QuizId = 5, QuizName = "Super Mario Quiz", ImageUrl = """../src/assets/images/cards/Super_mario.png""" },
-             new QuizModel { QuizId = 6, QuizName = "The Legend of Zelda Quiz", ImageUrl = """../src/assets/images/Zelda.jpg""" },
-             new QuizModel { QuizId = 7, QuizName = "Mixed Game Quiz", ImageUrl = """../src/assets/images/MixedQuiz.webp""" }
+             new QuizModel
+             {
+                 QuizId = 1,
+                 QuizName = "World of Warcraft Quiz",
+                 ImageUrl = """../src/assets/images/cards/world-of-warcraft.png""",
+                 QuizDescription = "An expansive MMORPG set in a fantasy world where players create characters, complete quests, and battle in epic raids.",
+                 QuizChallenge = "Dive into the rich lore, epic raids, and character classes of Azeroth as you tackle this World of Warcraft challenge."
+             },
+             new QuizModel
+             {
+                 QuizId = 2,
+                 QuizName = "League of Legends Quiz",
+                 ImageUrl = """../src/assets/images/LeagueOfLegends.webp""",
+                 QuizDescription = "A fast-paced multiplayer online battle arena (MOBA) where two teams of champions face off to destroy each other's Nexus.",
+                 QuizChallenge = "Prove your knowledge of champions, game mechanics, and legendary plays from the Summoner's Rift in this thrilling League of Legends quiz."
+             },
+             new QuizModel
+             {
+
+                 QuizId = 3,
+                 QuizName = "Pokemon Quiz",
+                 ImageUrl = """../src/assets/images/Pokemon.jpeg""",
+                 QuizDescription = "A beloved RPG where players capture, train, and battle creatures called Pokémon, striving to become the ultimate Pokémon Master.",
+                 QuizChallenge = "Test your skills in identifying Pokémon, their types, evolutions, and battle strategies in this ultimate Pokémon quiz."
+             },
+             new QuizModel
+             {
+                 QuizId = 4,
+                 QuizName = "Counter-Strike Quiz",
+                 ImageUrl = """../src/assets/images/CS.jpg""",
+                 QuizDescription = "A tactical first-person shooter that pits teams of terrorists and counter-terrorists against each other in intense, strategic combat.",
+                 QuizChallenge = "Show off your tactical knowledge, map awareness, and weapon expertise in this intense Counter-Strike quiz."
+             },
+             new QuizModel
+             {
+                 QuizId = 5,
+                 QuizName = "Super Mario Quiz",
+                 ImageUrl = """../src/assets/images/cards/Super_mario.png""",
+                 QuizDescription = "A classic platformer where Mario, a heroic plumber, navigates through levels to rescue Princess Peach from Bowser.",
+                 QuizChallenge = "Navigate through iconic levels, power-ups, and memorable characters from the Mario universe in this nostalgic Super Mario quiz."
+             },
+             new QuizModel
+             {
+                 QuizId = 6,
+                 QuizName = "The Legend of Zelda Quiz",
+                 ImageUrl = """../src/assets/images/Zelda.jpg""",
+                 QuizDescription = "An action-adventure series featuring Link, a hero who explores dungeons, solves puzzles, and battles foes to save the kingdom of Hyrule.",
+                 QuizChallenge = "Challenge your understanding of legendary quests, dungeons, and characters from the timeless world of The Legend of Zelda."
+             },
+             new QuizModel
+             {
+                 QuizId = 7,
+                 QuizName = "Mixed Game Quiz",
+                 ImageUrl = """../src/assets/images/MixedQuiz.webp""",
+                 QuizDescription = "A mixed quiz with questions from the beloved games, World of Warcraft, League of Legends, Pokemon, Super Mario, Counter-Strike and The Legend of Zelda",
+                 QuizChallenge = "Challenge yourself with a mixed quiz of the games, World of Warcraft, League of Legends, Pokemón, Counter-Strike, Super-Mario and The Legend of Zelda"
+             }
 );
 
             // Questions

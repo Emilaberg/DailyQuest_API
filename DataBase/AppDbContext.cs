@@ -80,16 +80,18 @@ namespace DataBase
                  QuizId = 1,
                  QuizName = "World of Warcraft Quiz",
                  ImageUrl = """../src/assets/images/cards/world-of-warcraft.png""",
-                 QuizDescription = "An expansive MMORPG set in a fantasy world where players create characters, complete quests, and battle in epic raids.",
-                 QuizChallenge = "Dive into the rich lore, epic raids, and character classes of Azeroth as you tackle this World of Warcraft challenge."
+                 QuizDescription = "World of Warcraft (WoW) is a massively multiplayer online role-playing game (MMORPG) developed by Blizzard Entertainment. Set in the fantasy world of Azeroth, players create characters and embark on epic quests, battling monsters, exploring dungeons, and engaging in player-versus-player combat. The game is known for its rich lore, expansive world, and vibrant community. Players can choose from various races and classes, each with unique abilities and storylines, making every adventure unique.",
+                 QuizChallenge = "Test your knowledge of the World of Warcraft universe with this engaging quiz! This quiz contains 10 questions that cover various aspects of the game, including its history, characters, locations, and gameplay mechanics. Whether you're a seasoned WoW player or new to the game, this quiz will challenge your understanding and provide a fun way to revisit the world of Azeroth."
              },
              new QuizModel
              {
                  QuizId = 2,
                  QuizName = "League of Legends Quiz",
                  ImageUrl = """../src/assets/images/LeagueOfLegends.webp""",
-                 QuizDescription = "A fast-paced multiplayer online battle arena (MOBA) where two teams of champions face off to destroy each other's Nexus.",
-                 QuizChallenge = "Prove your knowledge of champions, game mechanics, and legendary plays from the Summoner's Rift in this thrilling League of Legends quiz."
+                 QuizDescription = "League of Legends is a popular multiplayer online battle arena (MOBA) game developed by Riot Games. Players control champions with unique abilities and work together in teams to destroy the enemy's Nexus. The game features a diverse roster of characters, strategic gameplay, and a vibrant esports scene, making it a favorite among competitive gamers worldwide."
+
+,
+                 QuizChallenge = "Test your League of Legends knowledge with this thrilling quiz! Featuring 15 questions, this quiz explores the game's champions, strategies, lore, and iconic moments. Whether you're a veteran player or just starting, this quiz will challenge your understanding of the Rift and the legends within it."
              },
              new QuizModel
              {
@@ -97,40 +99,40 @@ namespace DataBase
                  QuizId = 3,
                  QuizName = "Pokemon Quiz",
                  ImageUrl = """../src/assets/images/Pokemon.jpeg""",
-                 QuizDescription = "A beloved RPG where players capture, train, and battle creatures called Pokémon, striving to become the ultimate Pokémon Master.",
-                 QuizChallenge = "Test your skills in identifying Pokémon, their types, evolutions, and battle strategies in this ultimate Pokémon quiz."
+                 QuizDescription = "Pokémon is a beloved role-playing game series developed by Game Freak and published by Nintendo. Players capture, train, and battle Pokémon creatures, aiming to become the ultimate Pokémon Trainer. With various regions, hundreds of species, and engaging turn-based battles, Pokémon remains one of the most popular franchises in gaming history.",
+                 QuizChallenge = "Dive into the world of Pokémon with this engaging quiz! This 15-question challenge covers various aspects of the game, including Pokémon types, evolutions, iconic characters, and battle mechanics. Test your skills and see if you can become a Pokémon Master!"
              },
              new QuizModel
              {
                  QuizId = 4,
                  QuizName = "Counter-Strike Quiz",
                  ImageUrl = """../src/assets/images/CS.jpg""",
-                 QuizDescription = "A tactical first-person shooter that pits teams of terrorists and counter-terrorists against each other in intense, strategic combat.",
-                 QuizChallenge = "Show off your tactical knowledge, map awareness, and weapon expertise in this intense Counter-Strike quiz."
+                 QuizDescription = "Counter-Strike is a tactical first-person shooter developed by Valve Corporation. The game pits two teams—Terrorists and Counter-Terrorists—against each other in objective-based gameplay. Known for its strategic depth, skillful shooting mechanics, and competitive atmosphere, Counter-Strike remains a cornerstone of the esports world.",
+                 QuizChallenge = "Show off your Counter-Strike expertise with this intense quiz! Featuring 15 questions, this challenge tests your knowledge of maps, weapons, strategies, and key moments in Counter-Strike history. Whether you're a casual player or a seasoned pro, this quiz will keep you on your toes."
              },
              new QuizModel
              {
                  QuizId = 5,
                  QuizName = "Super Mario Quiz",
                  ImageUrl = """../src/assets/images/cards/Super_mario.png""",
-                 QuizDescription = "A classic platformer where Mario, a heroic plumber, navigates through levels to rescue Princess Peach from Bowser.",
-                 QuizChallenge = "Navigate through iconic levels, power-ups, and memorable characters from the Mario universe in this nostalgic Super Mario quiz."
+                 QuizDescription = "Super Mario is a classic platformer series created by Nintendo. Players control Mario, a heroic plumber who navigates colorful levels, defeats enemies, and rescues Princess Peach from the villain Bowser. Known for its iconic gameplay, catchy music, and memorable characters, Super Mario is a staple of gaming culture.",
+                 QuizChallenge = "Take on the Super Mario quiz and test your knowledge of the Mushroom Kingdom! This 15-question challenge covers the series' characters, power-ups, levels, and hidden secrets. Whether you're a lifelong fan or new to Mario's adventures, this quiz is sure to entertain."
              },
              new QuizModel
              {
                  QuizId = 6,
                  QuizName = "The Legend of Zelda Quiz",
                  ImageUrl = """../src/assets/images/Zelda.jpg""",
-                 QuizDescription = "An action-adventure series featuring Link, a hero who explores dungeons, solves puzzles, and battles foes to save the kingdom of Hyrule.",
-                 QuizChallenge = "Challenge your understanding of legendary quests, dungeons, and characters from the timeless world of The Legend of Zelda."
+                 QuizDescription = "The Legend of Zelda is an action-adventure series developed by Nintendo. Players control Link, a hero who embarks on epic quests to save Princess Zelda and the kingdom of Hyrule. With its open-world exploration, challenging puzzles, and rich storytelling, Zelda remains one of gaming's most beloved franchises.",
+                 QuizChallenge = "Test your knowledge of The Legend of Zelda with this exciting quiz! Featuring 10 questions, this challenge delves into the game's lore, characters, dungeons, and memorable moments. Whether you're a seasoned adventurer or just discovering Hyrule, this quiz will test your heroic spirit."
              },
              new QuizModel
              {
                  QuizId = 7,
                  QuizName = "Mixed Game Quiz",
                  ImageUrl = """../src/assets/images/MixedQuiz.webp""",
-                 QuizDescription = "A mixed quiz with questions from the beloved games, World of Warcraft, League of Legends, Pokemon, Super Mario, Counter-Strike and The Legend of Zelda",
-                 QuizChallenge = "Challenge yourself with a mixed quiz of the games, World of Warcraft, League of Legends, Pokemón, Counter-Strike, Super-Mario and The Legend of Zelda"
+                 QuizDescription = "Test your knowledge across some of the most iconic games ever made, including World of Warcraft, League of Legends, Pokémon, Super Mario, Counter-Strike, and The Legend of Zelda. This mixed quiz brings together questions from each game, making it perfect for fans of all genres.",
+                 QuizChallenge = "Dive into a challenge that spans multiple gaming universes! With 10 questions covering World of Warcraft, League of Legends, Pokémon, Counter-Strike, Super Mario, and The Legend of Zelda, this quiz will put your gaming knowledge to the ultimate test."
              }
 );
 
@@ -145,7 +147,7 @@ namespace DataBase
                 new QuestionModel { QuestionId = 6, Question = "Who guards the Caverns of Time?", Image = """../src/assets/images/CavernsOfTime.webp""" },
                 new QuestionModel { QuestionId = 7, Question = "Which race can choose to be either Horde or Alliance?", Image = """../src/assets/images/Class.jpg""" },
                 new QuestionModel { QuestionId = 8, Question = "What material is needed to craft a Thunderfury?", Image = """../src/assets/images/ThunderFury.png""" },
-                new QuestionModel { QuestionId = 9, Question = "Who did players fight in the Firelands raid?", Image = """../src/assets/images/Fireland.jpg""" },
+                new QuestionModel { QuestionId = 9, Question = "Who did players fight in the Firelands raid?", Image = """../src/assets/images/Firelands.jpg""" },
                 new QuestionModel { QuestionId = 10, Question = "Which dragon aspect is responsible for the Emerald Dream?", Image = """../src/assets/images/dragon.jpg""" },
                 new QuestionModel { QuestionId = 11, Question = "What was the first battleground introduced in WoW?", Image = """../src/assets/images/WSG.webp""" },
                 new QuestionModel { QuestionId = 12, Question = "Which raid includes the fight against Illidan?", Image = """../src/assets/images/Illidan.webp""" },

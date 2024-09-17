@@ -15,7 +15,7 @@ public class LocalFileReaderTests(ITestOutputHelper output)
 {
     private const string TestJsonPath = "./TestProgramProperties.json";
     private const string TestTempPath = "./TestTempFile.json";
-    private readonly ITestOutputHelper _output;
+    private readonly ITestOutputHelper _output = output;
 
 
 
